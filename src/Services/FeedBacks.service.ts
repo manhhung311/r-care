@@ -1,4 +1,4 @@
-import { CustomerInformationCreateDTO } from '@app/common/DTO/CustomerInformation-create.dto';
+import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
 import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
