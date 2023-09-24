@@ -1,4 +1,4 @@
-import { CustomerInformationCreateDTO } from '@app/common/DTO/CustomerInformation-create.dto';
+import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
 import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
