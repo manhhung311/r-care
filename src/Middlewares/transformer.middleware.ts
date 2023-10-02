@@ -11,17 +11,16 @@ import { JwtService } from '@nestjs/jwt';
 export class TransformerMiddleware implements NestMiddleware {
   constructor(private readonly jwt: JwtService) {}
   async use(req: Request, res: Response, next: NextFunction) {
-    if (req.headers.authorization.startsWith('Bearer ')) {
-      try {
+    try {
+      if (req.headers.authorization.startsWith('Bearer ')) {
         const token = req.headers.authorization.replace('Bearer ', '');
         const info = await this.verifyToken(token);
-        console.log(info);
         req.body = this.Transformer(req.body, <string>(<any>info).EncryptKey);
         next();
-      } catch (ex) {
+      } else {
         throw new UnauthorizedException();
       }
-    } else {
+    } catch (ex) {
       throw new UnauthorizedException();
     }
   }

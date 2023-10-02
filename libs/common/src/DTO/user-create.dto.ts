@@ -1,96 +1,60 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class CustomerInformationCreateDTO {
+export class UserCreateDTO {
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  lastName: string;
+  UserAvatar: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  firstName: string;
+  UserId: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  brithDay: string;
+  ComId: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  gender: string;
+  GroupId: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  address: string;
+  FullName: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  wards: string;
+  email: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  district: string;
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
-  @IsNotEmpty()
-  province: string;
+  ComName: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  country: string;
-
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
-  @IsNotEmpty()
-  emails: string[];
-
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
-  @IsNotEmpty()
-  phoneNumber: string[];
-
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
-  @IsNotEmpty()
-  linkSocial: string[];
-
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
-  @IsNotEmpty()
-  jobs: string;
-
-  ComId?: string;
+  UserRole: string;
 }

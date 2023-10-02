@@ -8,6 +8,12 @@ import { CustomerInformationRepository } from './Repositories/CustomerInformatio
 import { FeedbacksRepository } from './Repositories/FeedBacks.repository';
 import { TransformerMiddleware } from './Middlewares/transformer.middleware';
 import { JwtService } from '@nestjs/jwt';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './Guards/auth.guards';
+import { UsersService } from './Services/Users.service';
+import { UsersRepository } from './Repositories/Users.repository';
+import { RolesGuard } from './Guards/roles.guards';
+import { RolesRepository } from './Repositories/Roles.repository';
 
 @Module({
   imports: [
@@ -28,8 +34,19 @@ import { JwtService } from '@nestjs/jwt';
   providers: [
     JwtService,
     FeedbacksRepository,
+    UsersRepository,
+    RolesRepository,
     CustomerInformationRepository,
     CustomerInformationService,
+    UsersService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule implements NestModule {
@@ -39,6 +56,7 @@ export class AppModule implements NestModule {
       .forRoutes(
         { path: '*', method: 1 },
         { path: '*', method: 2 },
+        { path: '*', method: 0 },
         { path: '*', method: 4 },
       );
   }

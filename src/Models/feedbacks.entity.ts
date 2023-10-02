@@ -1,7 +1,9 @@
-import { HydratedDocument, ObjectId } from 'mongoose';
-import { Updates } from './updates.entity';
+import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Expose, Transform } from 'class-transformer';
+import { CustomerInformation } from './CustomerInformation.entity';
+import { PurchaseInformation } from './PurchaseInformation.entity';
+import { Users } from './Users.entity';
 
 export type FeedbacksDocument = HydratedDocument<Feedbacks>;
 @Schema()
@@ -28,10 +30,22 @@ export class Feedbacks {
   rate: number;
 
   @Prop()
-  createdAt: Date;
+  ComId: string;
 
   @Prop()
-  updates: Updates[];
+  createdAt: Date;
+
+  @Prop({ default: false })
+  isHidden: boolean;
+
+  @Prop({ type: mongoose.Schema.ObjectId, ref: Users.name })
+  user: Users;
+
+  // @Prop({ type: mongoose.Schema.ObjectId, ref: CustomerInformation.name })
+  // customerInformation: CustomerInformation;
+
+  // @Prop({ type: mongoose.Schema.ObjectId, ref: PurchaseInformation.name })
+  // purchaseInformation: PurchaseInformation;
 }
 
 export const FeedbacksSchema = SchemaFactory.createForClass(Feedbacks);

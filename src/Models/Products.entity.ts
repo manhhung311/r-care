@@ -4,44 +4,22 @@ import { Feedbacks } from './feedbacks.entity';
 import { Expenses } from './expenses.entity';
 import { Users } from './Users.entity';
 
-export type PurchaseInformationnDocument =
-  HydratedDocument<PurchaseInformation>;
+export type ProductsDocument = HydratedDocument<Products>;
 @Schema()
-export class PurchaseInformation {
-  constructor(product: string) {
-    this.product = product;
+export class Products {
+  constructor(name: string) {
+    this.name = name;
   }
   id: string;
 
   @Prop()
-  ComId: string;
-
-  @Prop()
-  product: string;
-
-  @Prop()
-  currencyUnit: string;
-
-  @Prop()
-  describe: string;
-
-  @Prop()
-  quantity: number;
+  name: string;
 
   @Prop()
   unit: string;
 
   @Prop()
   price: number;
-
-  @Prop()
-  transportFee: number;
-
-  @Prop()
-  province: string;
-
-  @Prop()
-  country: string;
 
   @Prop({ default: false })
   isHidden: boolean;
@@ -51,7 +29,15 @@ export class PurchaseInformation {
 
   @Prop({ default: new Date() })
   createdAt: Date;
+
+  @Prop()
+  ComId: string;
+
+  // @Prop({ type: mongoose.Schema.ObjectId, ref: Feedbacks.name })
+  // feedBack: Feedbacks;
+
+  // @Prop({ type: mongoose.Schema.ObjectId, ref: Expenses.name })
+  // expense: Expenses;
 }
 
-export const PurchaseInformationSchema =
-  SchemaFactory.createForClass(PurchaseInformation);
+export const ProductsSchema = SchemaFactory.createForClass(Products);

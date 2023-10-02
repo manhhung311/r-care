@@ -1,8 +1,12 @@
 import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
 import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
-import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { Feedbacks, FeedbacksDocument } from 'src/Models/feedbacks.entity';
+import { CustomerInformationUpdateDTO } from '@app/common/DTO/customerInformation-update.dto';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Users } from 'src/Models/Users.entity';
 import { CustomerInformationRepository } from 'src/Repositories/CustomerInformation.repository';
 import { FeedbacksRepository } from 'src/Repositories/FeedBacks.repository';
 
@@ -13,13 +17,48 @@ export class CustomerInformationService {
     private readonly feedbacksRepository: FeedbacksRepository,
   ) {}
 
-  public async create(info: CustomerInformationCreateDTO) {
+  public async create(user: Users, info: CustomerInformationCreateDTO) {
+    info.ComId = user.ComId;
     const information = await this.customerInformationRepository.create(info);
     return information;
   }
 
-  public async query(query?: CustomerInformationQueryDTO) {
-    query.conditions = JSON.parse(<any>query.conditions);
-    return this.customerInformationRepository.findAll(query);
+  private converStringToJson(obj) {
+    try {
+      return JSON.parse(<any>obj);
+    } catch (ex) {
+      return null;
+    }
+  }
+
+  public async query(user: Users, query?: CustomerInformationQueryDTO) {
+    query.conditions = this.converStringToJson(query.conditions);
+    return this.customerInformationRepository.findAllByCompany(
+      user.ComId,
+      query,
+    );
+  }
+
+  public async update(user: Users, info: CustomerInformationUpdateDTO) {
+    const infoCustom = await this.customerInformationRepository.findOneById(
+      info.id,
+    );
+    if (!infoCustom) throw new NotFoundException();
+    if (infoCustom.ComId !== user.ComId) throw new ForbiddenException();
+    await this.customerInformationRepository.update(info.id, {
+      ...info,
+      isHidden: true,
+    });
+    const newInfo = await this.create(user, info);
+    return newInfo;
+  }
+
+  public async deleteCustom(user: Users, idInfo: string) {
+    const infoCustom = await this.customerInformationRepository.findOneById(
+      idInfo,
+    );
+    if (!infoCustom) throw new NotFoundException();
+    if (infoCustom.ComId !== user.ComId) throw new ForbiddenException();
+    return this.customerInformationRepository.softDelete(idInfo);
   }
 }

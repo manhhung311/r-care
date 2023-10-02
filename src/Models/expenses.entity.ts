@@ -1,6 +1,7 @@
 import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Updates } from './updates.entity';
+import { PurchaseInformation } from './PurchaseInformation.entity';
+import { Users } from './Users.entity';
 export type ExpensesDocument = HydratedDocument<Expenses>;
 
 @Schema()
@@ -14,11 +15,17 @@ export class Expenses {
   @Prop()
   createdAt: Date;
 
-  // @Prop({ default: false })
-  // delete: boolean;
+  @Prop({ default: false })
+  isHidden: boolean;
 
-  @Prop({ type: mongoose.Schema.ObjectId, ref: Updates.name })
-  updates: ObjectId;
+  @Prop()
+  ComId: string;
+
+  @Prop({ type: mongoose.Schema.ObjectId, ref: Users.name })
+  user: Users;
+
+  @Prop({ type: mongoose.Schema.ObjectId, ref: PurchaseInformation.name })
+  purchaseInformation: ObjectId;
 }
 
 export const ExpensesSchema = SchemaFactory.createForClass(Expenses);

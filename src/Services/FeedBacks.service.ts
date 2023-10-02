@@ -6,7 +6,7 @@ import { Feedbacks, FeedbacksDocument } from 'src/Models/feedbacks.entity';
 import { CustomerInformationRepository } from 'src/Repositories/CustomerInformation.repository';
 
 @Injectable()
-export class CustomerInformationService {
+export class FeedBacksService {
   constructor(
     private readonly customerInformationRepository: CustomerInformationRepository,
   ) {}

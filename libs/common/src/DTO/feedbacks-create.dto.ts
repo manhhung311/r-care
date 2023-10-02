@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class CustomerInformationCreateDTO {
+export class FeedBacksCreateDTO {
   @ApiProperty({
     example: '',
     description: 'asaa',
@@ -18,21 +18,21 @@ export class CustomerInformationCreateDTO {
 
   @ApiProperty({
     example: '',
-    description: 'asaa',
+    description: 'ngày sinh nhật',
   })
   @IsNotEmpty()
   brithDay: string;
 
   @ApiProperty({
     example: '',
-    description: 'asaa',
+    description: 'giới tính',
   })
   @IsNotEmpty()
   gender: string;
 
   @ApiProperty({
     example: '',
-    description: 'asaa',
+    description: 'địa chỉ',
   })
   @IsNotEmpty()
   address: string;
@@ -66,14 +66,14 @@ export class CustomerInformationCreateDTO {
 
   @ApiProperty({
     example: '',
-    description: 'asaa',
+    description: 'danh sách email',
   })
   @IsNotEmpty()
   emails: string[];
 
   @ApiProperty({
     example: '',
-    description: 'asaa',
+    description: 'danh sách số điện thoại',
   })
   @IsNotEmpty()
   phoneNumber: string[];
@@ -87,10 +87,8 @@ export class CustomerInformationCreateDTO {
 
   @ApiProperty({
     example: '',
-    description: 'asaa',
+    description: 'công việc',
   })
   @IsNotEmpty()
   jobs: string;
-
-  ComId?: string;
 }

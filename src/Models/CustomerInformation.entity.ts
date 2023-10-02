@@ -4,6 +4,7 @@ import { HydratedDocument, ObjectId } from 'mongoose';
 import { Expose, Transform } from 'class-transformer';
 import * as mongoose from 'mongoose';
 import { Feedbacks } from './feedbacks.entity';
+import { Users } from './Users.entity';
 
 export type CustomerInformationDocument = HydratedDocument<CustomerInformation>;
 
@@ -26,6 +27,9 @@ export class CustomerInformation {
 
   @Prop()
   gender: string;
+
+  @Prop()
+  ComId: string;
 
   @Prop()
   address: string;
@@ -52,6 +56,12 @@ export class CustomerInformation {
 
   @Prop()
   jobs: string;
+
+  @Prop({ default: false })
+  isHidden: boolean;
+
+  @Prop({ type: mongoose.Schema.ObjectId, ref: Users.name })
+  user: Users;
 
   @Prop({
     type: [{ type: mongoose.Schema.ObjectId, ref: PurchaseInformation.name }],
