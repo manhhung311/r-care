@@ -1,55 +1,55 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class FeedBacksCreateDTO {
+export class PurchaseInformationCreateDTO {
   @ApiProperty({
     example: '',
-    description: '',
-  })
-  @IsNotEmpty()
-  idInfo: string;
-
-  @ApiProperty({
-    example: '',
-    description: '',
-  })
-  @IsNotEmpty()
-  idPurchase: string;
-
-  @ApiProperty({
-    example: '',
-    description: 'tên sản phẩm',
+    description: 'asaa',
   })
   @IsNotEmpty()
   product: string;
 
   @ApiProperty({
     example: '',
-    description: 'nhận xét của khách hàng',
+    description: 'asaa',
   })
   @IsNotEmpty()
-  comment: string;
+  currencyUnit: string;
 
   @ApiProperty({
     example: '',
-    description: 'khuyên nghị của khách hàng',
+    description: 'asaa',
   })
   @IsNotEmpty()
-  recommendations: string;
+  describe: string;
 
   @ApiProperty({
     example: '',
-    description: 'gợi ý của khách hàng cho sản phẩm',
+    description: 'asaa',
   })
   @IsNotEmpty()
-  suggestion: string;
+  quantity: number;
 
   @ApiProperty({
     example: '',
-    description: 'số sao đánh giá 1 - 5',
+    description: 'asaa',
   })
   @IsNotEmpty()
-  rate: number;
+  unit: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  price: number;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  transportFee: number;
 
   ComId: string;
 }

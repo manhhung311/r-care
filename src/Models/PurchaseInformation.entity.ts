@@ -1,17 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { Feedbacks } from './feedbacks.entity';
-import { Expenses } from './expenses.entity';
+import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 import { Users } from './Users.entity';
+import { Expose, Transform } from 'class-transformer';
+import { Feedbacks } from './feedbacks.entity';
 
 export type PurchaseInformationnDocument =
   HydratedDocument<PurchaseInformation>;
 @Schema()
 export class PurchaseInformation {
-  constructor(product: string) {
-    this.product = product;
-  }
-  id: string;
+  _id?: ObjectId | string;
+
+  @Expose()
+  @Transform((value) => value.obj?._id?.toString(), { toClassOnly: true })
+  id?: string;
 
   @Prop()
   ComId: string;
@@ -45,6 +46,9 @@ export class PurchaseInformation {
 
   @Prop({ default: false })
   isHidden: boolean;
+
+  @Prop({ type: mongoose.Schema.ObjectId, ref: Feedbacks.name })
+  feedBack: Feedbacks;
 
   @Prop({ type: mongoose.Schema.ObjectId, ref: Users.name })
   user: Users;
