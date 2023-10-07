@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
-import { Users } from './Users.entity';
+import { Users } from './users.entity';
 import { Expose, Transform } from 'class-transformer';
 import { Feedbacks } from './feedbacks.entity';
 

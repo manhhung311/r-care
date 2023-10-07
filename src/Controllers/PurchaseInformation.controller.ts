@@ -16,7 +16,7 @@ import {
 import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
 import { ACTION, SUBJECT } from 'src/Models/Roles.entity';
-import { Users } from 'src/Models/Users.entity';
+import { Users } from 'src/Models/users.entity';
 import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
 import { PurchaseInformationService } from 'src/Services/PurchaseInformation.service';
 

@@ -4,7 +4,7 @@ import { HydratedDocument, ObjectId } from 'mongoose';
 import { Expose, Transform } from 'class-transformer';
 import * as mongoose from 'mongoose';
 import { Feedbacks } from './feedbacks.entity';
-import { Users } from './Users.entity';
+import { Users } from './users.entity';
 
 export type CustomerInformationDocument = HydratedDocument<CustomerInformation>;
 

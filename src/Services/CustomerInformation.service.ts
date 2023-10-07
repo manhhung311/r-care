@@ -6,7 +6,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Users } from 'src/Models/Users.entity';
+import { Users } from 'src/Models/users.entity';
 import { CustomerInformationRepository } from 'src/Repositories/CustomerInformation.repository';
 import { FeedbacksRepository } from 'src/Repositories/FeedBacks.repository';
 

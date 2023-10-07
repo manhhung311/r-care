@@ -15,7 +15,7 @@ import {
 import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
 import { ACTION, SUBJECT, TYPEROLE } from 'src/Models/Roles.entity';
-import { Users } from 'src/Models/Users.entity';
+import { Users } from 'src/Models/users.entity';
 import { FeedBacksService } from 'src/Services/FeedBacks.service';
 
 @Controller('feedbacks')

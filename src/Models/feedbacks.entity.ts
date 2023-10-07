@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Expose, Transform } from 'class-transformer';
 import { CustomerInformation } from './CustomerInformation.entity';
 import { PurchaseInformation } from './PurchaseInformation.entity';
-import { Users } from './Users.entity';
+import { Users } from './users.entity';
 
 export type FeedbacksDocument = HydratedDocument<Feedbacks>;
 @Schema()

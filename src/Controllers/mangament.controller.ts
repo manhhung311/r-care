@@ -10,22 +10,23 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import axios from 'axios';
 import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
-import { ACTION, SUBJECT } from 'src/Models/Roles.entity';
+import { ACTION, SUBJECT, TYPEROLE } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/users.entity';
 import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
 
-@Controller('customerInformation')
+@Controller('mangament')
 export class CustomerInformationController {
   constructor(
     private readonly customerInformationService: CustomerInformationService,
   ) {}
 
   @Get()
-  @Roles({ action: ACTION.GET, subject: SUBJECT.customer })
-  query(@User() user: Users, @Query() query?: CustomerInformationQueryDTO) {
-    return this.customerInformationService.query(user, query);
+  @Roles({ role: TYPEROLE.ADMIN, action: ACTION.GET, subject: SUBJECT.customer })
+  getAllUser(@User() user: Users) {
+    // return axios.
   }
 
   @Post()

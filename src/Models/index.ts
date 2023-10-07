@@ -8,7 +8,7 @@ import {
 } from './PurchaseInformation.entity';
 import { Expenses, ExpensesSchema } from './expenses.entity';
 import { Feedbacks, FeedbacksSchema } from './feedbacks.entity';
-import { Users, UsersSchema } from './Users.entity';
+import { Users, UsersSchema } from './users.entity';
 import { Roles, RolesSchema } from './Roles.entity';
 
 type Schema = {

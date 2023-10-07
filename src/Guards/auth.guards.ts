@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { Users } from 'src/Models/Users.entity';
+import { Users } from 'src/Models/users.entity';
 import { UsersService } from 'src/Services/Users.service';
 
 @Injectable()

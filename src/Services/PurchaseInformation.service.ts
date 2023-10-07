@@ -9,7 +9,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Users } from 'src/Models/Users.entity';
+import { Users } from 'src/Models/users.entity';
 import { PurchaseInformationRepository } from 'src/Repositories/PurchaseInformation.repository';
 
 @Injectable()
