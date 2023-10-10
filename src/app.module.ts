@@ -14,6 +14,9 @@ import { UsersService } from './Services/Users.service';
 import { UsersRepository } from './Repositories/Users.repository';
 import { RolesGuard } from './Guards/roles.guards';
 import { RolesRepository } from './Repositories/Roles.repository';
+import { PurchaseInformationController } from './Controllers/PurchaseInformation.controller';
+import { PurchaseInformationService } from './Services/PurchaseInformation.service';
+import { PurchaseInformationRepository } from './Repositories/PurchaseInformation.repository';
 
 @Module({
   imports: [
@@ -30,14 +33,16 @@ import { RolesRepository } from './Repositories/Roles.repository';
       isGlobal: true,
     }),
   ],
-  controllers: [CustomerInformationController],
+  controllers: [CustomerInformationController, PurchaseInformationController],
   providers: [
     JwtService,
     FeedbacksRepository,
     UsersRepository,
     RolesRepository,
     CustomerInformationRepository,
+    PurchaseInformationRepository,
     CustomerInformationService,
+    PurchaseInformationService,
     UsersService,
     {
       provide: APP_GUARD,

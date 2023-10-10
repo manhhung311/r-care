@@ -36,6 +36,8 @@ export class Users {
     type: [{ type: mongoose.Schema.ObjectId, ref: Roles.name }],
   })
   roles: Roles[];
+
+  token: string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);

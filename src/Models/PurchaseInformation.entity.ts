@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
-import { Users } from './users.entity';
+import { Users } from './Users.entity';
 import { Expose, Transform } from 'class-transformer';
 import { Feedbacks } from './feedbacks.entity';
 
@@ -27,16 +27,16 @@ export class PurchaseInformation {
   describe: string;
 
   @Prop()
-  quantity: number;
+  quantity: string;
 
   @Prop()
   unit: string;
 
   @Prop()
-  price: number;
+  price: string;
 
   @Prop()
-  transportFee: number;
+  transportFee: string;
 
   @Prop()
   province: string;

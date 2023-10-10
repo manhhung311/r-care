@@ -28,7 +28,7 @@ export class PurchaseInformationCreateDTO {
     description: 'asaa',
   })
   @IsNotEmpty()
-  quantity: number;
+  quantity: string;
 
   @ApiProperty({
     example: '',
@@ -42,14 +42,14 @@ export class PurchaseInformationCreateDTO {
     description: 'asaa',
   })
   @IsNotEmpty()
-  price: number;
+  price: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
   @IsNotEmpty()
-  transportFee: number;
+  transportFee: string;
 
   ComId: string;
 }

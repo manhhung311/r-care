@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { Users } from 'src/Models/users.entity';
+import { Users } from 'src/Models/Users.entity';
 import { UsersService } from 'src/Services/Users.service';
 
 @Injectable()
@@ -34,6 +34,7 @@ export class AuthGuard implements CanActivate {
       );
       if (!user) {
         user = await this.usersService.getUserById(payload.UserId);
+        user.token = token;
         AuthGuard.users.push(user);
       }
       if (!user)
@@ -47,6 +48,7 @@ export class AuthGuard implements CanActivate {
           ComName: payload.ComName,
           UserRole: payload.UserRole,
         });
+      user.token = token;
       request['user'] = user;
     } catch (ex) {
       console.log(ex);

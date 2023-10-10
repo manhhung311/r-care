@@ -29,7 +29,7 @@ export class PurchaseInformationRepository extends BaseRepositoryAbstract<Purcha
       }),
       this.purchaseInformation
         .find({ ...query.conditions, ComId: ComId, deleted_at: null })
-        .populate('feedBacks')
+        // .populate('feedBacks')
         .skip(query.skip)
         .limit(query.limit),
       ,

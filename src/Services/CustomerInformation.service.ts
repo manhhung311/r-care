@@ -6,7 +6,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Users } from 'src/Models/users.entity';
+import { Users } from 'src/Models/Users.entity';
 import { CustomerInformationRepository } from 'src/Repositories/CustomerInformation.repository';
 import { FeedbacksRepository } from 'src/Repositories/FeedBacks.repository';
 
@@ -33,10 +33,13 @@ export class CustomerInformationService {
 
   public async query(user: Users, query?: CustomerInformationQueryDTO) {
     query.conditions = this.converStringToJson(query.conditions);
-    return this.customerInformationRepository.findAllByCompany(
-      user.ComId,
-      query,
-    );
+    return {
+      ...(await this.customerInformationRepository.findAllByCompany(
+        user.ComId,
+        query,
+      )),
+      token: user.token,
+    };
   }
 
   public async update(user: Users, info: CustomerInformationUpdateDTO) {
@@ -49,6 +52,7 @@ export class CustomerInformationService {
       ...info,
       isHidden: true,
     });
+    delete info.id;
     const newInfo = await this.create(user, info);
     return newInfo;
   }

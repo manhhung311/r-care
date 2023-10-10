@@ -30,7 +30,12 @@ export class TransformerMiddleware implements NestMiddleware {
       // eslint-disable-next-line prefer-const
       let newObj = {};
       for (const key in obj) {
-        if (key == 'email' || key == 'lastName' || key == 'firstName')
+        if (
+          key == 'email' ||
+          key == 'lastName' ||
+          key == 'firstName' ||
+          key == 'id'
+        )
           newObj[key] = obj[key];
         else if (typeof obj[key] !== 'string') {
           if (Array.isArray(obj[key])) {
@@ -55,7 +60,7 @@ export class TransformerMiddleware implements NestMiddleware {
 
   private Encoding(text: string, secret: string) {
     try {
-      const cipher = crypto.createCipheriv(
+      const cipher = crypto.createDecipheriv(
         'aes-256-ctr',
         Buffer.from(secret.padEnd(32, '\0')),
         Buffer.from(secret.padEnd(16, '\0')),

@@ -9,7 +9,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Users } from 'src/Models/users.entity';
+import { Users } from 'src/Models/Users.entity';
 import { PurchaseInformationRepository } from 'src/Repositories/PurchaseInformation.repository';
 
 @Injectable()
@@ -50,6 +50,7 @@ export class PurchaseInformationService {
       ...info,
       isHidden: true,
     });
+    delete info.id;
     const newInfo = await this.create(user, info);
     return newInfo;
   }

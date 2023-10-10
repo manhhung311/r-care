@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Feedbacks } from './feedbacks.entity';
 import { Expenses } from './expenses.entity';
-import { Users } from './users.entity';
+import { Users } from './Users.entity';
 
 export type ShippingMethodsDocument = HydratedDocument<ShippingMethods>;
 @Schema()

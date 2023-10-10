@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { FilterQuery, Model, QueryOptions } from 'mongoose';
+import { FilterQuery, Model, QueryOptions, ObjectId } from 'mongoose';
 
 export abstract class BaseRepositoryAbstract<T> {
   protected constructor(private readonly model: Model<T>) {

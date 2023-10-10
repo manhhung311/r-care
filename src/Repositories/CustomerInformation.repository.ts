@@ -26,10 +26,16 @@ export class CustomerInformationRepository extends BaseRepositoryAbstract<Custom
       this.customerInformation_model.count({
         ...query.conditions,
         ComId: ComId,
+        isHidden: false,
         deleted_at: null,
       }),
       this.customerInformation_model
-        .find({ ...query.conditions, ComId: ComId, deleted_at: null })
+        .find({
+          ...query.conditions,
+          ComId: ComId,
+          isHidden: false,
+          deleted_at: null,
+        })
         .populate('feedBacks')
         .skip(query.skip)
         .limit(query.limit),
