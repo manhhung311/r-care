@@ -17,9 +17,13 @@ import { RolesRepository } from './Repositories/Roles.repository';
 import { PurchaseInformationController } from './Controllers/PurchaseInformation.controller';
 import { PurchaseInformationService } from './Services/PurchaseInformation.service';
 import { PurchaseInformationRepository } from './Repositories/PurchaseInformation.repository';
+import { MangamentController } from './Controllers/mangament.controller';
+import { HttpModule } from '@nestjs/axios';
+import { MangamentService } from './Services/Mangament.service';
 
 @Module({
   imports: [
+    HttpModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -33,7 +37,11 @@ import { PurchaseInformationRepository } from './Repositories/PurchaseInformatio
       isGlobal: true,
     }),
   ],
-  controllers: [CustomerInformationController, PurchaseInformationController],
+  controllers: [
+    CustomerInformationController,
+    PurchaseInformationController,
+    MangamentController,
+  ],
   providers: [
     JwtService,
     FeedbacksRepository,
@@ -43,6 +51,7 @@ import { PurchaseInformationRepository } from './Repositories/PurchaseInformatio
     PurchaseInformationRepository,
     CustomerInformationService,
     PurchaseInformationService,
+    MangamentService,
     UsersService,
     {
       provide: APP_GUARD,

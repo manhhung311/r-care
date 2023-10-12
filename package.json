@@ -29,6 +29,7 @@
     "lint:ci": "npm run lint:typecheck && npm run lint:eslint && npm run lint:prettier"
   },
   "dependencies": {
+    "@nestjs/axios": "^3.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",

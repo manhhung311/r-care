@@ -1,6 +1,7 @@
 import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
 import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 import { CustomerInformationUpdateDTO } from '@app/common/DTO/customerInformation-update.dto';
+import { HttpService } from '@nestjs/axios';
 import {
   Body,
   Controller,
@@ -10,17 +11,16 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-// import axios from 'axios';
 import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
 import { ACTION, SUBJECT, TYPEROLE } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/Users.entity';
 import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
+import { MangamentService } from 'src/Services/Mangament.service';
 
 @Controller('mangament')
 export class MangamentController {
-  constructor() {}
-
+  constructor(private readonly mangament: MangamentService) {}
   @Get()
   @Roles({
     role: TYPEROLE.ADMIN,
@@ -28,7 +28,7 @@ export class MangamentController {
     subject: SUBJECT.customer,
   })
   getAllUser(@User() user: Users) {
-    // return axios.get('');
+    return this.mangament.getAllUser(user);
   }
 
   @Post()

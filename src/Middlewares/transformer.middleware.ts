@@ -34,7 +34,11 @@ export class TransformerMiddleware implements NestMiddleware {
           key == 'email' ||
           key == 'lastName' ||
           key == 'firstName' ||
-          key == 'id'
+          key == 'id' ||
+          key == 'isHidden' ||
+          key == '_id' ||
+          key == 'ComId' ||
+          key == 'idUser'
         )
           newObj[key] = obj[key];
         else if (typeof obj[key] !== 'string') {

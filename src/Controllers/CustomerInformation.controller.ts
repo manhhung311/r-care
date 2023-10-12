@@ -6,6 +6,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -26,6 +27,12 @@ export class CustomerInformationController {
   @Roles({ action: ACTION.GET, subject: SUBJECT.customer })
   query(@User() user: Users, @Query() query?: CustomerInformationQueryDTO) {
     return this.customerInformationService.query(user, query);
+  }
+
+  @Get(':id')
+  @Roles({ action: ACTION.GET, subject: SUBJECT.customer })
+  getById(@Param('id') id: string, @User() user: Users) {
+    return this.customerInformationService.getById(id, user);
   }
 
   @Post()

@@ -34,6 +34,7 @@ export class AuthGuard implements CanActivate {
       );
       if (!user) {
         user = await this.usersService.getUserById(payload.UserId);
+        user.secret = payload.EncryptKey;
         user.token = token;
         AuthGuard.users.push(user);
       }
@@ -48,6 +49,7 @@ export class AuthGuard implements CanActivate {
           ComName: payload.ComName,
           UserRole: payload.UserRole,
         });
+      user.secret = payload.EncryptKey;
       user.token = token;
       request['user'] = user;
     } catch (ex) {

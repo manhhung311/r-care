@@ -37,6 +37,7 @@ export class Users {
   })
   roles: Roles[];
 
+  secret: string;
   token: string;
 }
 

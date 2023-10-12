@@ -9,6 +9,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -17,7 +18,6 @@ import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
 import { ACTION, SUBJECT } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/Users.entity';
-import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
 import { PurchaseInformationService } from 'src/Services/PurchaseInformation.service';
 
 @Controller('PurchaseInformation')
@@ -30,6 +30,12 @@ export class PurchaseInformationController {
   @Roles({ action: ACTION.GET, subject: SUBJECT.purchase })
   query(@User() user: Users, @Query() query?: PurchaseInformationQueryDTO) {
     return this.purchaseInformationService.query(user, query);
+  }
+
+  @Get(':id')
+  @Roles({ action: ACTION.GET, subject: SUBJECT.customer })
+  getById(@Param('id') id: string, @User() user: Users) {
+    return this.purchaseInformationService.getById(id, user);
   }
 
   @Post()

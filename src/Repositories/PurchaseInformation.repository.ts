@@ -23,12 +23,11 @@ export class PurchaseInformationRepository extends BaseRepositoryAbstract<Purcha
   ): Promise<PurchaseInformationnDocument> {
     const [count, items] = await Promise.all([
       this.purchaseInformation.count({
-        ...query.conditions,
         ComId: ComId,
         deleted_at: null,
       }),
       this.purchaseInformation
-        .find({ ...query.conditions, ComId: ComId, deleted_at: null })
+        .find({ ComId: ComId, deleted_at: null })
         // .populate('feedBacks')
         .skip(query.skip)
         .limit(query.limit),

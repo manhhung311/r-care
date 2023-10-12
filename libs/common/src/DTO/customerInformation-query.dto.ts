@@ -2,15 +2,18 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
 
-export class QueryDTO {
-  lastName: string;
-}
 export class CustomerInformationQueryDTO {
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  conditions?: QueryDTO;
+  lastName?: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  firstName?: string;
 
   @ApiProperty({
     example: '',

@@ -51,5 +51,12 @@ export class PurchaseInformationCreateDTO {
   @IsNotEmpty()
   transportFee: string;
 
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  idUser: string;
+
   ComId: string;
 }

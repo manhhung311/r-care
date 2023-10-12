@@ -32,14 +32,23 @@ export class CustomerInformationService {
   }
 
   public async query(user: Users, query?: CustomerInformationQueryDTO) {
-    query.conditions = this.converStringToJson(query.conditions);
+    const { skip, limit, ...data } = query;
     return {
       ...(await this.customerInformationRepository.findAllByCompany(
+        skip,
+        limit,
+        data,
         user.ComId,
-        query,
       )),
-      token: user.token,
+      secret: user.secret,
     };
+  }
+
+  public async getById(id: string, user: Users) {
+    console.log(id);
+    const customer = await this.customerInformationRepository.findOneById(id);
+    if (!customer) throw new NotFoundException();
+    return { ...customer, secret: user.secret };
   }
 
   public async update(user: Users, info: CustomerInformationUpdateDTO) {

@@ -19,26 +19,28 @@ export class CustomerInformationRepository extends BaseRepositoryAbstract<Custom
   }
 
   public async findAllByCompany(
-    ComId: string,
+    skip: number,
+    limit: number,
     query: CustomerInformationQueryDTO,
+    ComId: string,
   ): Promise<CustomerInformationDocument> {
     const [count, items] = await Promise.all([
       this.customerInformation_model.count({
-        ...query.conditions,
+        ...query,
         ComId: ComId,
         isHidden: false,
         deleted_at: null,
       }),
       this.customerInformation_model
         .find({
-          ...query.conditions,
+          ...query,
           ComId: ComId,
           isHidden: false,
           deleted_at: null,
         })
-        .populate('feedBacks')
-        .skip(query.skip)
-        .limit(query.limit),
+        .populate([{ path: 'feedBacks' }, { path: 'purchases' }])
+        .skip(skip)
+        .limit(limit),
       ,
     ]);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
