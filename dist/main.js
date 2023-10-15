@@ -229,15 +229,7 @@ __decorate([
     }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CustomerInformationCreateDTO.prototype, "lastName", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CustomerInformationCreateDTO.prototype, "firstName", void 0);
+], CustomerInformationCreateDTO.prototype, "fullName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: '',
@@ -664,7 +656,6 @@ let CustomerInformationService = class CustomerInformationService {
         return Object.assign(Object.assign({}, infoCustom), { items: info, secret: user.secret });
     }
     async getById(id, user) {
-        console.log(id);
         const customer = await this.customerInformationRepository.findOneById(id);
         if (!customer)
             throw new common_1.NotFoundException();
@@ -837,11 +828,7 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CustomerInformation.prototype, "lastName", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], CustomerInformation.prototype, "firstName", void 0);
+], CustomerInformation.prototype, "fullName", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)

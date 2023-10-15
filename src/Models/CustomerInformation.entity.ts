@@ -17,10 +17,7 @@ export class CustomerInformation {
   id?: string;
 
   @Prop()
-  lastName: string;
-
-  @Prop()
-  firstName: string;
+  fullName: string;
 
   @Prop()
   brithDay: string;

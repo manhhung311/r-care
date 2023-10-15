@@ -7,14 +7,7 @@ export class CustomerInformationCreateDTO {
     description: 'asaa',
   })
   @IsNotEmpty()
-  lastName: string;
-
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
-  @IsNotEmpty()
-  firstName: string;
+  fullName: string;
 
   @ApiProperty({
     example: '',
