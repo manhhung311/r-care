@@ -73,7 +73,6 @@ export class CustomerInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   linkSocial: string[];
 
   @ApiProperty({
