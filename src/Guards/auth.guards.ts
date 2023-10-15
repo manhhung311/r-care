@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
       let user = AuthGuard.users?.find(
         (item) => item.UserId === payload.UserId,
       );
-      if (!user) {
+      if (user) {
         user = await this.usersService.getUserById(payload.UserId);
         user.secret = payload.EncryptKey;
         user.token = token;

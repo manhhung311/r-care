@@ -1372,7 +1372,7 @@ let AuthGuard = AuthGuard_1 = class AuthGuard {
                 secret: this.configService.get('SECRET'),
             });
             let user = (_a = AuthGuard_1.users) === null || _a === void 0 ? void 0 : _a.find((item) => item.UserId === payload.UserId);
-            if (!user) {
+            if (user) {
                 user = await this.usersService.getUserById(payload.UserId);
                 user.secret = payload.EncryptKey;
                 user.token = token;
@@ -1567,7 +1567,7 @@ let RolesGuard = class RolesGuard {
         }
         const { user } = context.switchToHttp().getRequest();
         return requiredRoles.some((role) => {
-            if (user.isAdmin || user.roles.find((item) => item.isAdmin))
+            if (user.UserRole || user.roles.find((item) => item.isAdmin))
                 return true;
             if (user.roles.find((item) => {
                 return item.permissions.find((permission) => (permission.subject === role.subject &&
