@@ -326,6 +326,14 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "jobs", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CustomerInformationCreateDTO.prototype, "income", void 0);
 
 
 /***/ }),
@@ -648,7 +656,12 @@ let CustomerInformationService = class CustomerInformationService {
     }
     async query(user, query) {
         const { skip, limit } = query, data = __rest(query, ["skip", "limit"]);
-        return Object.assign(Object.assign({}, (await this.customerInformationRepository.findAllByCompany(skip, limit, data, user.ComId))), { secret: user.secret });
+        const infoCustom = await this.customerInformationRepository.findAllByCompany(skip, limit, data, user.ComId);
+        const info = infoCustom.items.map((item) => {
+            return Object.assign(Object.assign({}, item), { _doc: Object.assign(Object.assign({}, item._doc), { star: item.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                        item.feedBacks.length || 0 }) });
+        });
+        return Object.assign(Object.assign({}, infoCustom), { items: info, secret: user.secret });
     }
     async getById(id, user) {
         console.log(id);
@@ -719,7 +732,7 @@ let CustomerInformationRepository = class CustomerInformationRepository extends 
             this.customerInformation_model.count(Object.assign(Object.assign({}, query), { ComId: ComId, isHidden: false, deleted_at: null })),
             this.customerInformation_model
                 .find(Object.assign(Object.assign({}, query), { ComId: ComId, isHidden: false, deleted_at: null }))
-                .populate([{ path: 'feedBacks' }, { path: 'purchases' }])
+                .populate([{ path: 'feedBacks' }])
                 .skip(skip)
                 .limit(limit),
             ,
@@ -877,6 +890,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], CustomerInformation.prototype, "jobs", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], CustomerInformation.prototype, "income", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ default: false }),
     __metadata("design:type", Boolean)
@@ -1892,6 +1909,7 @@ let PurchaseInformationService = class PurchaseInformationService {
         const purchase = await this.purchaseInformationRepository.findOneById(id);
         if (!purchase)
             throw new common_1.NotFoundException();
+        console.log('service', Object.assign(Object.assign({}, purchase), { secret: user.secret }));
         return Object.assign(Object.assign({}, purchase), { secret: user.secret });
     }
     async update(user, info) {
@@ -2222,14 +2240,14 @@ let TransformInterceptor = class TransformInterceptor {
                         key == 'isHidden' ||
                         key == '_id' ||
                         key == 'ComId' ||
-                        key == 'idUser')
+                        key == 'idUser' ||
+                        key == 'star')
                         newObj[key] = obj[key];
                     else if (typeof obj[key] !== 'string') {
                         if (Array.isArray(obj[key])) {
                             const newArray = [];
                             for (const index in obj[key]) {
-                                if (Array.isArray(obj[key][index]) ||
-                                    this.isJson(obj[key][index]))
+                                if (Array.isArray(obj[key][index]))
                                     newArray.push(this.Transformer(obj[key][index], secret));
                                 else
                                     newArray.push(this.Decoding(obj[key][index], secret));

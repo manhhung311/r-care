@@ -23,7 +23,7 @@ export class CustomerInformationRepository extends BaseRepositoryAbstract<Custom
     limit: number,
     query: CustomerInformationQueryDTO,
     ComId: string,
-  ): Promise<CustomerInformationDocument> {
+  ) /*: Promise<CustomerInformationDocument>*/ {
     const [count, items] = await Promise.all([
       this.customerInformation_model.count({
         ...query,
@@ -38,7 +38,7 @@ export class CustomerInformationRepository extends BaseRepositoryAbstract<Custom
           isHidden: false,
           deleted_at: null,
         })
-        .populate([{ path: 'feedBacks' }, { path: 'purchases' }])
+        .populate([{ path: 'feedBacks' }])
         .skip(skip)
         .limit(limit),
       ,

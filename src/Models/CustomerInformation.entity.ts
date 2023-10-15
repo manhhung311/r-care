@@ -57,6 +57,9 @@ export class CustomerInformation {
   @Prop()
   jobs: string;
 
+  @Prop()
+  income: string;
+
   @Prop({ default: false })
   isHidden: boolean;
 

@@ -92,5 +92,12 @@ export class CustomerInformationCreateDTO {
   @IsNotEmpty()
   jobs: string;
 
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  income: string;
+
   ComId?: string;
 }

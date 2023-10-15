@@ -50,17 +50,15 @@ export class TransformInterceptor<T>
             key == 'isHidden' ||
             key == '_id' ||
             key == 'ComId' ||
-            key == 'idUser'
+            key == 'idUser' ||
+            key == 'star'
           )
             newObj[key] = obj[key];
           else if (typeof obj[key] !== 'string') {
             if (Array.isArray(obj[key])) {
               const newArray = [];
               for (const index in obj[key]) {
-                if (
-                  Array.isArray(obj[key][index]) ||
-                  this.isJson(obj[key][index])
-                )
+                if (Array.isArray(obj[key][index]))
                   newArray.push(this.Transformer(obj[key][index], secret));
                 else newArray.push(this.Decoding(obj[key][index], secret));
               }

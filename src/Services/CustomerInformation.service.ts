@@ -33,13 +33,27 @@ export class CustomerInformationService {
 
   public async query(user: Users, query?: CustomerInformationQueryDTO) {
     const { skip, limit, ...data } = query;
-    return {
-      ...(await this.customerInformationRepository.findAllByCompany(
+    const infoCustom =
+      await this.customerInformationRepository.findAllByCompany(
         skip,
         limit,
         data,
         user.ComId,
-      )),
+      );
+    const info = infoCustom.items.map((item) => {
+      return {
+        ...item,
+        _doc: {
+          ...(<any>item)._doc,
+          star:
+            item.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+              item.feedBacks.length || 0,
+        },
+      };
+    });
+    return {
+      ...infoCustom,
+      items: info,
       secret: user.secret,
     };
   }

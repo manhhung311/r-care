@@ -53,6 +53,7 @@ export class PurchaseInformationService {
   public async getById(id: string, user: Users) {
     const purchase = await this.purchaseInformationRepository.findOneById(id);
     if (!purchase) throw new NotFoundException();
+    console.log('service', { ...purchase, secret: user.secret });
     return { ...purchase, secret: user.secret };
   }
 
