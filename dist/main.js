@@ -291,7 +291,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Array)
 ], CustomerInformationCreateDTO.prototype, "emails", void 0);
 __decorate([
@@ -299,7 +298,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Array)
 ], CustomerInformationCreateDTO.prototype, "phoneNumber", void 0);
 __decorate([

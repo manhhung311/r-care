@@ -61,14 +61,12 @@ export class CustomerInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   emails: string[];
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   phoneNumber: string[];
 
   @ApiProperty({
