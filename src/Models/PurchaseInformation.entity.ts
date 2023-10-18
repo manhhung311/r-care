@@ -42,6 +42,9 @@ export class PurchaseInformation {
   province: string;
 
   @Prop()
+  paymentTime: string;
+
+  @Prop()
   country: string;
 
   @Prop({ default: false })

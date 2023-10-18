@@ -53,7 +53,7 @@ export class CustomerInformationService {
   public async getById(id: string, user: Users) {
     const customer = await this.customerInformationRepository.findOneById(id);
     if (!customer) throw new NotFoundException();
-    return { ...customer, secret: user.secret };
+    return { ...(await customer.populate('purchases')), secret: user.secret };
   }
 
   public async update(user: Users, info: CustomerInformationUpdateDTO) {

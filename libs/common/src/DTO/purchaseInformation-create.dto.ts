@@ -13,7 +13,6 @@ export class PurchaseInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   currencyUnit: string;
 
   @ApiProperty({
@@ -48,8 +47,14 @@ export class PurchaseInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   transportFee: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  paymentTime: string;
 
   @ApiProperty({
     example: '',

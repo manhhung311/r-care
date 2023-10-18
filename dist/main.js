@@ -673,7 +673,7 @@ let CustomerInformationService = class CustomerInformationService {
         const customer = await this.customerInformationRepository.findOneById(id);
         if (!customer)
             throw new common_1.NotFoundException();
-        return Object.assign(Object.assign({}, customer), { secret: user.secret });
+        return Object.assign(Object.assign({}, (await customer.populate('purchases'))), { secret: user.secret });
     }
     async update(user, info) {
         const infoCustom = await this.customerInformationRepository.findOneById(info.id);
@@ -997,6 +997,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], PurchaseInformation.prototype, "province", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], PurchaseInformation.prototype, "paymentTime", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
@@ -1751,7 +1755,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], PurchaseInformationCreateDTO.prototype, "currencyUnit", void 0);
 __decorate([
@@ -1791,9 +1794,16 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], PurchaseInformationCreateDTO.prototype, "transportFee", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "paymentTime", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: '',
