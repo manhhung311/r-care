@@ -309,13 +309,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    __metadata("design:type", String)
-], CustomerInformationCreateDTO.prototype, "linkSocial", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "jobs", void 0);
@@ -332,7 +325,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "facebook", void 0);
 __decorate([
@@ -340,7 +332,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "linked", void 0);
 __decorate([
@@ -348,7 +339,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "instagram", void 0);
 __decorate([
@@ -356,7 +346,6 @@ __decorate([
         example: '',
         description: 'asaa',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "website", void 0);
 

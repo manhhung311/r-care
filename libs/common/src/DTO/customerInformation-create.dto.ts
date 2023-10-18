@@ -74,12 +74,6 @@ export class CustomerInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  linkSocial: string;
-
-  @ApiProperty({
-    example: '',
-    description: 'asaa',
-  })
   @IsNotEmpty()
   jobs: string;
 
@@ -94,28 +88,24 @@ export class CustomerInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   facebook: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   linked: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   instagram: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  @IsNotEmpty()
   website: string;
 
   ComId?: string;
