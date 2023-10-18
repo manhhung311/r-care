@@ -2621,8 +2621,11 @@ let TransformInterceptor = class TransformInterceptor {
                         if (Array.isArray(obj[key])) {
                             const newArray = [];
                             for (const index in obj[key]) {
-                                if (Array.isArray(obj[key][index]))
-                                    newArray.push(this.Transformer(obj[key][index], secret));
+                                if (Array.isArray(obj[key][index]) ||
+                                    typeof obj[key][index] === 'object')
+                                    newArray.push(this.Transformer(obj[key][index]._doc
+                                        ? obj[key][index]._doc
+                                        : obj[key][index], secret));
                                 else
                                     newArray.push(this.Decoding(obj[key][index], secret));
                             }
