@@ -327,6 +327,38 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CustomerInformationCreateDTO.prototype, "income", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CustomerInformationCreateDTO.prototype, "facebook", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CustomerInformationCreateDTO.prototype, "linked", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CustomerInformationCreateDTO.prototype, "instagram", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CustomerInformationCreateDTO.prototype, "website", void 0);
 
 
 /***/ }),
@@ -750,7 +782,7 @@ class BaseRepositoryAbstract {
     }
     async findOneById(id) {
         const item = await this.model.findById(id);
-        return item.deleted_at ? null : item;
+        return item;
     }
     async findOneByCondition(condition = {}) {
         return await this.model
@@ -765,7 +797,7 @@ class BaseRepositoryAbstract {
         return { count, items };
     }
     async update(id, dto) {
-        return await this.model.findOneAndUpdate({ _id: id, deleted_at: null }, dto, { new: true });
+        return await this.model.findOneAndUpdate({ _id: id }, dto, { new: true });
     }
     async softDelete(id) {
         const delete_item = await this.model.findById(id);
@@ -865,15 +897,27 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CustomerInformation.prototype, "linkSocial", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
 ], CustomerInformation.prototype, "jobs", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], CustomerInformation.prototype, "income", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], CustomerInformation.prototype, "facebook", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], CustomerInformation.prototype, "linked", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], CustomerInformation.prototype, "instagram", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], CustomerInformation.prototype, "website", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ default: false }),
     __metadata("design:type", Boolean)

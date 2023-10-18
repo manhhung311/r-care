@@ -15,7 +15,7 @@ export abstract class BaseRepositoryAbstract<T> {
   async findOneById(id: string): Promise<T> {
     const item = await this.model.findById(id);
     //@ts-ignore
-    return item.deleted_at ? null : item;
+    return item;
   }
 
   async findOneByCondition(condition = {}): Promise<T> {
@@ -44,11 +44,7 @@ export abstract class BaseRepositoryAbstract<T> {
   }
 
   async update(id: string, dto: Partial<T>): Promise<T> {
-    return await this.model.findOneAndUpdate(
-      { _id: id, deleted_at: null },
-      dto,
-      { new: true },
-    );
+    return await this.model.findOneAndUpdate({ _id: id }, dto, { new: true });
   }
 
   async softDelete(id: string): Promise<boolean> {

@@ -49,13 +49,22 @@ export class CustomerInformation {
   phoneNumber: string;
 
   @Prop()
-  linkSocial: string;
-
-  @Prop()
   jobs: string;
 
   @Prop()
   income: string;
+
+  @Prop()
+  facebook: string;
+
+  @Prop()
+  linked: string;
+
+  @Prop()
+  instagram: string;
+
+  @Prop()
+  website: string;
 
   @Prop({ default: false })
   isHidden: boolean;

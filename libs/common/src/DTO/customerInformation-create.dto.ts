@@ -43,6 +43,7 @@ export class CustomerInformationCreateDTO {
   })
   @IsNotEmpty()
   district: string;
+
   @ApiProperty({
     example: '',
     description: 'asaa',
@@ -88,6 +89,34 @@ export class CustomerInformationCreateDTO {
   })
   @IsNotEmpty()
   income: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  facebook: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  linked: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  instagram: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'asaa',
+  })
+  @IsNotEmpty()
+  website: string;
 
   ComId?: string;
 }
