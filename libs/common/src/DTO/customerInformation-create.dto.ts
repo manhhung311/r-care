@@ -62,7 +62,7 @@ export class CustomerInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  emails: string;
+  email: string;
 
   @ApiProperty({
     example: '',

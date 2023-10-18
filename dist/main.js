@@ -296,7 +296,7 @@ __decorate([
         description: 'asaa',
     }),
     __metadata("design:type", String)
-], CustomerInformationCreateDTO.prototype, "emails", void 0);
+], CustomerInformationCreateDTO.prototype, "email", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: '',
@@ -889,7 +889,7 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], CustomerInformation.prototype, "emails", void 0);
+], CustomerInformation.prototype, "email", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)

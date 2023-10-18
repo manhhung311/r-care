@@ -43,7 +43,7 @@ export class CustomerInformation {
   country: string;
 
   @Prop()
-  emails: string;
+  email: string;
 
   @Prop()
   phoneNumber: string;
