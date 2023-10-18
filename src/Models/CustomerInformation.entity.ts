@@ -43,13 +43,13 @@ export class CustomerInformation {
   country: string;
 
   @Prop()
-  emails: string[];
+  emails: string;
 
   @Prop()
-  phoneNumber: string[];
+  phoneNumber: string;
 
   @Prop()
-  linkSocial: string[];
+  linkSocial: string;
 
   @Prop()
   jobs: string;

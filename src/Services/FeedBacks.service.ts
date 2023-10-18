@@ -40,10 +40,15 @@ export class FeedBacksService {
     const customer = await this.customerInformationRepository.findOneById(
       data.idInfo,
     );
-    if (!customer) throw new ForbiddenException();
+    if (!customer) throw new NotFoundException();
+    if (customer && customer.ComId !== data.ComId)
+      throw new ForbiddenException();
     const purchase = await this.purchaseInformationRepository.findOneById(
       data.idPurchase,
     );
+    if (!purchase) throw new NotFoundException();
+    if (purchase && purchase.ComId !== data.ComId)
+      throw new ForbiddenException();
     const feedback = await this.feedbacksRepository.create(data);
     customer.feedBacks = [...customer.feedBacks, feedback];
     await customer.save();
@@ -52,17 +57,15 @@ export class FeedBacksService {
     return feedback;
   }
 
-  private converStringToJson(obj) {
-    try {
-      return JSON.parse(<any>obj);
-    } catch (ex) {
-      return null;
-    }
+  public async query(user: Users, query?: FeedBacksQueryDTO) {
+    return this.feedbacksRepository.findAllByCompany(user.ComId, query);
   }
 
-  public async query(user: Users, query?: FeedBacksQueryDTO) {
-    query.conditions = this.converStringToJson(query.conditions);
-    return this.feedbacksRepository.findAllByCompany(user.ComId, query);
+  public async getById(id: string, user: Users) {
+    const feedBack = await this.feedbacksRepository.findOneById(id);
+    if (!feedBack) throw new NotFoundException();
+    console.log('service', { ...feedBack, secret: user.secret });
+    return { ...feedBack, secret: user.secret };
   }
 
   public async update(user: Users, feedBack: FeedBacksUpdateDTO) {

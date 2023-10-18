@@ -20,15 +20,7 @@ export class CustomerInformationService {
   public async create(user: Users, info: CustomerInformationCreateDTO) {
     info.ComId = user.ComId;
     const information = await this.customerInformationRepository.create(info);
-    return information;
-  }
-
-  private converStringToJson(obj) {
-    try {
-      return JSON.parse(<any>obj);
-    } catch (ex) {
-      return null;
-    }
+    return { ...information, secret: user.secret };
   }
 
   public async query(user: Users, query?: CustomerInformationQueryDTO) {
@@ -76,7 +68,7 @@ export class CustomerInformationService {
     });
     delete info.id;
     const newInfo = await this.create(user, info);
-    return newInfo;
+    return { ...newInfo, secret: user.secret };
   }
 
   public async deleteCustom(user: Users, idInfo: string) {

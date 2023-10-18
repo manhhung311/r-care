@@ -2,12 +2,14 @@ import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformatio
 import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 import { CustomerInformationUpdateDTO } from '@app/common/DTO/customerInformation-update.dto';
 import { FeedBacksCreateDTO } from '@app/common/DTO/feedbacks-create.dto';
+import { FeedBacksQueryDTO } from '@app/common/DTO/feedbacks-query.dto';
 import { FeedBacksUpdateDTO } from '@app/common/DTO/feedbacks-update.dto';
 import {
   Body,
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -24,8 +26,14 @@ export class FeedbacksController {
 
   @Get()
   @Roles({ action: ACTION.GET, subject: SUBJECT.feedBacks })
-  query(@User() user: Users, @Query() query?: CustomerInformationQueryDTO) {
+  query(@User() user: Users, @Query() query?: FeedBacksQueryDTO) {
     return this.feedbacksService.query(user, query);
+  }
+
+  @Get(':id')
+  @Roles({ action: ACTION.GET, subject: SUBJECT.customer })
+  getById(@Param('id') id: string, @User() user: Users) {
+    return this.feedbacksService.getById(id, user);
   }
 
   @Post()

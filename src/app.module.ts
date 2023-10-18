@@ -20,6 +20,8 @@ import { PurchaseInformationRepository } from './Repositories/PurchaseInformatio
 import { MangamentController } from './Controllers/mangament.controller';
 import { HttpModule } from '@nestjs/axios';
 import { MangamentService } from './Services/Mangament.service';
+import { FeedbacksController } from './Controllers/Feedbacks.controller';
+import { FeedBacksService } from './Services/FeedBacks.service';
 
 @Module({
   imports: [
@@ -40,6 +42,7 @@ import { MangamentService } from './Services/Mangament.service';
   controllers: [
     CustomerInformationController,
     PurchaseInformationController,
+    FeedbacksController,
     MangamentController,
   ],
   providers: [
@@ -51,6 +54,7 @@ import { MangamentService } from './Services/Mangament.service';
     PurchaseInformationRepository,
     CustomerInformationService,
     PurchaseInformationService,
+    FeedBacksService,
     MangamentService,
     UsersService,
     {

@@ -20,12 +20,11 @@ export class FeedbacksRepository extends BaseRepositoryAbstract<FeedbacksDocumen
   ): Promise<FeedbacksDocument> {
     const [count, items] = await Promise.all([
       this.feedbacks_model.count({
-        ...query.conditions,
         ComId: ComId,
         deleted_at: null,
       }),
       this.feedbacks_model
-        .find({ ...query.conditions, ComId: ComId, deleted_at: null })
+        .find({ ComId: ComId, deleted_at: null })
         .populate('feedBacks')
         .skip(query.skip)
         .limit(query.limit),

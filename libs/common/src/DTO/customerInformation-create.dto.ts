@@ -61,19 +61,19 @@ export class CustomerInformationCreateDTO {
     example: '',
     description: 'asaa',
   })
-  emails: string[];
+  emails: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  phoneNumber: string[];
+  phoneNumber: string;
 
   @ApiProperty({
     example: '',
     description: 'asaa',
   })
-  linkSocial: string[];
+  linkSocial: string;
 
   @ApiProperty({
     example: '',

@@ -25,19 +25,11 @@ export class PurchaseInformationService {
     const infoCustom = await this.customerInformationRepository.findOneById(
       data.idUser,
     );
-    if (!infoCustom) throw new NotFoundException('cannot find user by id');
+    if (!infoCustom) throw new NotFoundException('cannot find customer by id');
     const information = await this.purchaseInformationRepository.create(data);
     infoCustom.purchases.push(information);
     infoCustom.save();
     return { ...information, secret: user.secret };
-  }
-
-  private converStringToJson(obj) {
-    try {
-      return JSON.parse(<any>obj);
-    } catch (ex) {
-      return null;
-    }
   }
 
   public async query(user: Users, query?: PurchaseInformationQueryDTO) {
