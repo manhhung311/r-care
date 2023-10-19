@@ -38,7 +38,7 @@ export class CustomerInformationRepository extends BaseRepositoryAbstract<Custom
           isHidden: false,
           deleted_at: null,
         })
-        .populate([{ path: 'feedBacks' }])
+        .populate([{ path: 'feedBacks' }, { path: 'purchases' }])
         .skip(skip)
         .limit(limit),
       ,

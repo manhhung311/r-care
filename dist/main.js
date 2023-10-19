@@ -737,7 +737,7 @@ let CustomerInformationRepository = class CustomerInformationRepository extends 
             this.customerInformation_model.count(Object.assign(Object.assign({}, query), { ComId: ComId, isHidden: false, deleted_at: null })),
             this.customerInformation_model
                 .find(Object.assign(Object.assign({}, query), { ComId: ComId, isHidden: false, deleted_at: null }))
-                .populate([{ path: 'feedBacks' }])
+                .populate([{ path: 'feedBacks' }, { path: 'purchases' }])
                 .skip(skip)
                 .limit(limit),
             ,
