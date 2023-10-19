@@ -33,8 +33,17 @@ export class PurchaseInformationService {
     await information.save();
     const newInfomationCustom = await (
       await this.customerInformationRepository.findOneById(data.idUser)
-    ).populate('purchases');
-    return { ...newInfomationCustom, secret: user.secret };
+    ).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+    return {
+      ...newInfomationCustom,
+      _doc: {
+        ...(<any>newInfomationCustom)._doc,
+        star:
+          newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+            newInfomationCustom.feedBacks.length || 0,
+      },
+      secret: user.secret,
+    };
   }
 
   public async query(user: Users, query?: PurchaseInformationQueryDTO) {
