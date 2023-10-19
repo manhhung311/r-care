@@ -31,7 +31,10 @@ export class PurchaseInformationService {
     await infoCustom.save();
     information.customer = infoCustom;
     await information.save();
-    return { ...information, secret: user.secret };
+    const newInfomationCustom = await (
+      await this.customerInformationRepository.findOneById(data.idUser)
+    ).populate('purchases');
+    return { ...newInfomationCustom, secret: user.secret };
   }
 
   public async query(user: Users, query?: PurchaseInformationQueryDTO) {

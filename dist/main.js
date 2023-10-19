@@ -1925,7 +1925,8 @@ let PurchaseInformationService = class PurchaseInformationService {
         await infoCustom.save();
         information.customer = infoCustom;
         await information.save();
-        return Object.assign(Object.assign({}, information), { secret: user.secret });
+        const newInfomationCustom = await (await this.customerInformationRepository.findOneById(data.idUser)).populate('purchases');
+        return Object.assign(Object.assign({}, newInfomationCustom), { secret: user.secret });
     }
     async query(user, query) {
         return Object.assign(Object.assign({}, (await this.purchaseInformationRepository.findAllByCompany(user.ComId, query))), { secret: user.secret });
