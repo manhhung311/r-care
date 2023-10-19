@@ -53,7 +53,20 @@ export class CustomerInformationService {
   public async getById(id: string, user: Users) {
     const customer = await this.customerInformationRepository.findOneById(id);
     if (!customer) throw new NotFoundException();
-    return { ...(await customer.populate('purchases')), secret: user.secret };
+    const customerData = await customer.populate([
+      { path: 'feedBacks' },
+      { path: 'purchases' },
+    ]);
+    return {
+      ...customerData,
+      _doc: {
+        ...(<any>customerData)._doc,
+        star:
+          customerData.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+            customerData.feedBacks.length || 0,
+      },
+      secret: user.secret,
+    };
   }
 
   public async update(user: Users, info: CustomerInformationUpdateDTO) {
@@ -68,7 +81,16 @@ export class CustomerInformationService {
     });
     delete info.id;
     const newInfo = await this.create(user, info);
-    return { ...newInfo, secret: user.secret };
+    return {
+      ...newInfo,
+      _doc: {
+        ...(<any>newInfo)._doc,
+        star:
+          newInfo.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+            newInfo.feedBacks.length || 0,
+      },
+      secret: user.secret,
+    };
   }
 
   public async deleteCustom(user: Users, idInfo: string) {

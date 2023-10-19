@@ -673,7 +673,12 @@ let CustomerInformationService = class CustomerInformationService {
         const customer = await this.customerInformationRepository.findOneById(id);
         if (!customer)
             throw new common_1.NotFoundException();
-        return Object.assign(Object.assign({}, (await customer.populate('purchases'))), { secret: user.secret });
+        const customerData = await customer.populate([
+            { path: 'feedBacks' },
+            { path: 'purchases' },
+        ]);
+        return Object.assign(Object.assign({}, customerData), { _doc: Object.assign(Object.assign({}, customerData._doc), { star: customerData.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                    customerData.feedBacks.length || 0 }), secret: user.secret });
     }
     async update(user, info) {
         const infoCustom = await this.customerInformationRepository.findOneById(info.id);
@@ -684,7 +689,8 @@ let CustomerInformationService = class CustomerInformationService {
         await this.customerInformationRepository.update(info.id, Object.assign(Object.assign({}, info), { isHidden: true }));
         delete info.id;
         const newInfo = await this.create(user, info);
-        return Object.assign(Object.assign({}, newInfo), { secret: user.secret });
+        return Object.assign(Object.assign({}, newInfo), { _doc: Object.assign(Object.assign({}, newInfo._doc), { star: newInfo.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                    newInfo.feedBacks.length || 0 }), secret: user.secret });
     }
     async deleteCustom(user, idInfo) {
         const infoCustom = await this.customerInformationRepository.findOneById(idInfo);
