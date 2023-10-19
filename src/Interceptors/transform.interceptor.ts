@@ -52,16 +52,17 @@ export class TransformInterceptor<T>
             key == 'ComId' ||
             key == 'idUser' ||
             key == 'star'
-          )
+          ) {
             newObj[key] = obj[key];
-          else if (typeof obj[key] !== 'string') {
+          } else if (typeof obj[key] !== 'string') {
             if (Array.isArray(obj[key])) {
               const newArray = [];
               for (const index in obj[key]) {
                 if (
-                  Array.isArray(obj[key][index]) ||
-                  typeof obj[key][index] === 'object'
-                )
+                  (Array.isArray(obj[key][index]) ||
+                    typeof obj[key][index] === 'object') &&
+                  obj[key][index] !== undefined
+                ) {
                   newArray.push(
                     this.Transformer(
                       obj[key][index]._doc
@@ -70,14 +71,21 @@ export class TransformInterceptor<T>
                       secret,
                     ),
                   );
-                else newArray.push(this.Decoding(obj[key][index], secret));
+                } else newArray.push(this.Decoding(obj[key][index], secret));
               }
               newObj[key] = newArray;
             } else {
-              newObj[key] = this.Transformer(obj[key], secret);
+              newObj[key] = this.Transformer(
+                obj[key]._doc ? obj[key]._doc : obj[key],
+                secret,
+              );
             }
-          } else
-            newObj[key] = obj[key] ? this.Decoding(obj[key], secret) : obj[key];
+          } else {
+            if (typeof obj[key] !== 'function')
+              newObj[key] = obj[key]
+                ? this.Decoding(obj[key], secret)
+                : obj[key];
+          }
         }
       return newObj;
     } catch (ex) {

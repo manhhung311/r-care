@@ -945,7 +945,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PurchaseInformationSchema = exports.PurchaseInformation = void 0;
 const mongoose_1 = __webpack_require__(13);
@@ -953,6 +953,7 @@ const mongoose_2 = __webpack_require__(15);
 const Users_entity_1 = __webpack_require__(14);
 const class_transformer_1 = __webpack_require__(21);
 const feedbacks_entity_1 = __webpack_require__(22);
+const CustomerInformation_entity_1 = __webpack_require__(19);
 let PurchaseInformation = class PurchaseInformation {
 };
 exports.PurchaseInformation = PurchaseInformation;
@@ -1018,8 +1019,12 @@ __decorate([
     __metadata("design:type", typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object)
 ], PurchaseInformation.prototype, "user", void 0);
 __decorate([
+    (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.ObjectId, ref: 'CustomerInformation' }),
+    __metadata("design:type", typeof (_c = typeof CustomerInformation_entity_1.CustomerInformation !== "undefined" && CustomerInformation_entity_1.CustomerInformation) === "function" ? _c : Object)
+], PurchaseInformation.prototype, "customer", void 0);
+__decorate([
     (0, mongoose_1.Prop)({ default: new Date() }),
-    __metadata("design:type", typeof (_c = typeof Date !== "undefined" && Date) === "function" ? _c : Object)
+    __metadata("design:type", typeof (_d = typeof Date !== "undefined" && Date) === "function" ? _d : Object)
 ], PurchaseInformation.prototype, "createdAt", void 0);
 exports.PurchaseInformation = PurchaseInformation = __decorate([
     (0, mongoose_1.Schema)()
@@ -1917,7 +1922,9 @@ let PurchaseInformationService = class PurchaseInformationService {
             throw new common_1.NotFoundException('cannot find customer by id');
         const information = await this.purchaseInformationRepository.create(data);
         infoCustom.purchases.push(information);
-        infoCustom.save();
+        await infoCustom.save();
+        information.customer = infoCustom;
+        await information.save();
         return Object.assign(Object.assign({}, information), { secret: user.secret });
     }
     async query(user, query) {
@@ -2615,28 +2622,35 @@ let TransformInterceptor = class TransformInterceptor {
                         key == '_id' ||
                         key == 'ComId' ||
                         key == 'idUser' ||
-                        key == 'star')
+                        key == 'star') {
                         newObj[key] = obj[key];
+                    }
                     else if (typeof obj[key] !== 'string') {
                         if (Array.isArray(obj[key])) {
                             const newArray = [];
                             for (const index in obj[key]) {
-                                if (Array.isArray(obj[key][index]) ||
-                                    typeof obj[key][index] === 'object')
+                                if ((Array.isArray(obj[key][index]) ||
+                                    typeof obj[key][index] === 'object') &&
+                                    obj[key][index] !== undefined) {
                                     newArray.push(this.Transformer(obj[key][index]._doc
                                         ? obj[key][index]._doc
                                         : obj[key][index], secret));
+                                }
                                 else
                                     newArray.push(this.Decoding(obj[key][index], secret));
                             }
                             newObj[key] = newArray;
                         }
                         else {
-                            newObj[key] = this.Transformer(obj[key], secret);
+                            newObj[key] = this.Transformer(obj[key]._doc ? obj[key]._doc : obj[key], secret);
                         }
                     }
-                    else
-                        newObj[key] = obj[key] ? this.Decoding(obj[key], secret) : obj[key];
+                    else {
+                        if (typeof obj[key] !== 'function')
+                            newObj[key] = obj[key]
+                                ? this.Decoding(obj[key], secret)
+                                : obj[key];
+                    }
                 }
             return newObj;
         }

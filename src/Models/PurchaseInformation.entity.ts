@@ -3,6 +3,7 @@ import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 import { Users } from './Users.entity';
 import { Expose, Transform } from 'class-transformer';
 import { Feedbacks } from './feedbacks.entity';
+import { CustomerInformation } from './CustomerInformation.entity';
 
 export type PurchaseInformationnDocument =
   HydratedDocument<PurchaseInformation>;
@@ -55,6 +56,9 @@ export class PurchaseInformation {
 
   @Prop({ type: mongoose.Schema.ObjectId, ref: Users.name })
   user: Users;
+
+  @Prop({ type: mongoose.Schema.ObjectId, ref: 'CustomerInformation' })
+  customer: CustomerInformation;
 
   @Prop({ default: new Date() })
   createdAt: Date;

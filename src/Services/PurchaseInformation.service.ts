@@ -28,7 +28,9 @@ export class PurchaseInformationService {
     if (!infoCustom) throw new NotFoundException('cannot find customer by id');
     const information = await this.purchaseInformationRepository.create(data);
     infoCustom.purchases.push(information);
-    infoCustom.save();
+    await infoCustom.save();
+    information.customer = infoCustom;
+    await information.save();
     return { ...information, secret: user.secret };
   }
 
