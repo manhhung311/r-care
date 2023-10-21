@@ -686,11 +686,10 @@ let CustomerInformationService = class CustomerInformationService {
             throw new common_1.NotFoundException();
         if (infoCustom.ComId !== user.ComId)
             throw new common_1.ForbiddenException();
-        await this.customerInformationRepository.update(info.id, Object.assign(Object.assign({}, info), { isHidden: true }));
-        delete info.id;
-        const newInfo = await this.create(user, info);
-        return Object.assign(Object.assign({}, newInfo), { _doc: Object.assign(Object.assign({}, newInfo._doc), { star: newInfo.feedBacks.reduce((n, { rate }) => n + rate, 0) /
-                    newInfo.feedBacks.length || 0 }), secret: user.secret });
+        const infoUpdate = await (await this.customerInformationRepository.update(info.id, Object.assign({}, info))).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+        await this.create(user, Object.assign(Object.assign({}, infoCustom), { isHidden: true }));
+        return Object.assign(Object.assign({}, infoUpdate), { _doc: Object.assign(Object.assign({}, infoUpdate._doc), { star: infoUpdate.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                    infoUpdate.feedBacks.length || 0 }), secret: user.secret });
     }
     async deleteCustom(user, idInfo) {
         const infoCustom = await this.customerInformationRepository.findOneById(idInfo);

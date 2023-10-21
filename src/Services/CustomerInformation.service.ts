@@ -6,6 +6,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import mongoose from 'mongoose';
 import { Users } from 'src/Models/Users.entity';
 import { CustomerInformationRepository } from 'src/Repositories/CustomerInformation.repository';
 import { FeedbacksRepository } from 'src/Repositories/FeedBacks.repository';
@@ -17,7 +18,10 @@ export class CustomerInformationService {
     private readonly feedbacksRepository: FeedbacksRepository,
   ) {}
 
-  public async create(user: Users, info: CustomerInformationCreateDTO) {
+  public async create(
+    user: Users,
+    info: CustomerInformationCreateDTO & { isHidden?: boolean },
+  ) {
     info.ComId = user.ComId;
     const information = await this.customerInformationRepository.create(info);
     return { ...information, secret: user.secret };
@@ -75,19 +79,19 @@ export class CustomerInformationService {
     );
     if (!infoCustom) throw new NotFoundException();
     if (infoCustom.ComId !== user.ComId) throw new ForbiddenException();
-    await this.customerInformationRepository.update(info.id, {
-      ...info,
-      isHidden: true,
-    });
-    delete info.id;
-    const newInfo = await this.create(user, info);
+    const infoUpdate = await (
+      await this.customerInformationRepository.update(info.id, {
+        ...info,
+      })
+    ).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+    await this.create(user, { ...infoCustom, isHidden: true });
     return {
-      ...newInfo,
+      ...infoUpdate,
       _doc: {
-        ...(<any>newInfo)._doc,
+        ...(<any>infoUpdate)._doc,
         star:
-          newInfo.feedBacks.reduce((n, { rate }) => n + rate, 0) /
-            newInfo.feedBacks.length || 0,
+          infoUpdate.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+            infoUpdate.feedBacks.length || 0,
       },
       secret: user.secret,
     };
