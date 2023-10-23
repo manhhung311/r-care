@@ -6,7 +6,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import mongoose from 'mongoose';
 import { Users } from 'src/Models/Users.entity';
 import { CustomerInformationRepository } from 'src/Repositories/CustomerInformation.repository';
 import { FeedbacksRepository } from 'src/Repositories/FeedBacks.repository';

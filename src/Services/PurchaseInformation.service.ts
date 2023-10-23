@@ -73,9 +73,19 @@ export class PurchaseInformationService {
       ...info,
       isHidden: true,
     });
-    delete info.id;
-    const newInfo = await this.create(user, info);
-    return newInfo;
+    const newInfomationCustom = await (
+      await this.customerInformationRepository.findOneById(info.idUser)
+    ).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+    await this.create(user, info);
+    return {
+      ...newInfomationCustom,
+      _doc: {
+        ...(<any>newInfomationCustom)._doc,
+        star:
+          newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+            newInfomationCustom.feedBacks.length || 0,
+      },
+    };
   }
 
   public async deletePurchase(user: Users, id: string) {

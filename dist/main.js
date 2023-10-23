@@ -1951,9 +1951,10 @@ let PurchaseInformationService = class PurchaseInformationService {
         if (infoCustom.ComId !== user.ComId)
             throw new common_1.ForbiddenException();
         await this.purchaseInformationRepository.update(info.id, Object.assign(Object.assign({}, info), { isHidden: true }));
-        delete info.id;
-        const newInfo = await this.create(user, info);
-        return newInfo;
+        const newInfomationCustom = await (await this.customerInformationRepository.findOneById(info.idUser)).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+        await this.create(user, info);
+        return Object.assign(Object.assign({}, newInfomationCustom), { _doc: Object.assign(Object.assign({}, newInfomationCustom._doc), { star: newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                    newInfomationCustom.feedBacks.length || 0 }) });
     }
     async deletePurchase(user, id) {
         const infoCustom = await this.purchaseInformationRepository.findOneById(id);
