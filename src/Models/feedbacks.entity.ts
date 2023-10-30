@@ -1,8 +1,6 @@
 import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Expose, Transform } from 'class-transformer';
-import { CustomerInformation } from './CustomerInformation.entity';
-import { PurchaseInformation } from './PurchaseInformation.entity';
 import { Users } from './Users.entity';
 
 export type FeedbacksDocument = HydratedDocument<Feedbacks>;

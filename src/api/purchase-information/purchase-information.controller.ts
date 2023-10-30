@@ -1,6 +1,3 @@
-import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
-import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
-import { CustomerInformationUpdateDTO } from '@app/common/DTO/customerInformation-update.dto';
 import { PurchaseInformationCreateDTO } from '@app/common/DTO/purchaseInformation-create.dto';
 import { PurchaseInformationQueryDTO } from '@app/common/DTO/purchaseInformation-query.dto';
 import { PurchaseInformationUpdateDTO } from '@app/common/DTO/purchaseInformation-update.dto';
@@ -14,8 +11,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
+import { Roles } from 'src/Decorators/roles.decorator';
 import { ACTION, SUBJECT } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/Users.entity';
 import { PurchaseInformationService } from 'src/Services/PurchaseInformation.service';

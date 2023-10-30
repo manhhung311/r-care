@@ -3,7 +3,6 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { BaseRepositoryAbstract } from './base.repository';
 import { Users, UsersDocument } from 'src/Models/Users.entity';
-import { Roles } from 'src/Models/Roles.entity';
 
 @Injectable()
 export class UsersRepository extends BaseRepositoryAbstract<UsersDocument> {

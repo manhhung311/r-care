@@ -1,6 +1,3 @@
-import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
-import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
-import { CustomerInformationUpdateDTO } from '@app/common/DTO/customerInformation-update.dto';
 import { FeedBacksCreateDTO } from '@app/common/DTO/feedbacks-create.dto';
 import { FeedBacksQueryDTO } from '@app/common/DTO/feedbacks-query.dto';
 import { FeedBacksUpdateDTO } from '@app/common/DTO/feedbacks-update.dto';
@@ -14,8 +11,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
+import { Roles } from 'src/Decorators/roles.decorator';
 import { ACTION, SUBJECT, TYPEROLE } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/Users.entity';
 import { FeedBacksService } from 'src/Services/FeedBacks.service';

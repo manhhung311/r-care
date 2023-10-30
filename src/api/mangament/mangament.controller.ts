@@ -1,21 +1,10 @@
 import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
-import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 import { CustomerInformationUpdateDTO } from '@app/common/DTO/customerInformation-update.dto';
-import { HttpService } from '@nestjs/axios';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Put,
-  Query,
-} from '@nestjs/common';
-import { Roles } from 'src/Decorators/roles.decorator';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { User } from 'src/Decorators/users.decorator';
+import { Roles } from 'src/Decorators/roles.decorator';
 import { ACTION, SUBJECT, TYPEROLE } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/Users.entity';
-import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
 import { MangamentService } from 'src/Services/Mangament.service';
 
 @Controller('mangament')

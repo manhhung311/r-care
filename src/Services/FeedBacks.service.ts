@@ -1,5 +1,3 @@
-import { CustomerInformationCreateDTO } from '@app/common/DTO/customerInformation-create.dto';
-import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 import { FeedBacksCreateDTO } from '@app/common/DTO/feedbacks-create.dto';
 import { FeedBacksQueryDTO } from '@app/common/DTO/feedbacks-query.dto';
 import { FeedBacksUpdateDTO } from '@app/common/DTO/feedbacks-update.dto';

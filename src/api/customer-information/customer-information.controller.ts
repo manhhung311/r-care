@@ -11,8 +11,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { Roles } from 'src/Decorators/roles.decorator';
 import { User } from 'src/Decorators/users.decorator';
+import { Roles } from 'src/Decorators/roles.decorator';
 import { ACTION, SUBJECT } from 'src/Models/Roles.entity';
 import { Users } from 'src/Models/Users.entity';
 import { CustomerInformationService } from 'src/Services/CustomerInformation.service';
@@ -47,7 +47,7 @@ export class CustomerInformationController {
     return this.customerInformationService.update(user, data);
   }
 
-  @Delete()
+  @Delete(':id')
   @Roles({ action: ACTION.DELETE, subject: SUBJECT.customer })
   deleteInfo(@User() user: Users) {
     //

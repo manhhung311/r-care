@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { FilterQuery, Model, ObjectId, QueryOptions } from 'mongoose';
+import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { BaseRepositoryAbstract } from './base.repository';
 import {
   CustomerInformation,
   CustomerInformationDocument,
 } from 'src/Models/CustomerInformation.entity';
-import { Feedbacks } from 'src/Models/feedbacks.entity';
 import { CustomerInformationQueryDTO } from '@app/common/DTO/customerInformation-query.dto';
 
 @Injectable()

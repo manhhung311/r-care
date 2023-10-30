@@ -21,29 +21,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
 const common_1 = __webpack_require__(3);
-const CustomerInformation_controller_1 = __webpack_require__(4);
-const CustomerInformation_service_1 = __webpack_require__(16);
-const mongoose_1 = __webpack_require__(13);
-const config_1 = __webpack_require__(24);
-const Models_1 = __webpack_require__(25);
-const CustomerInformation_repository_1 = __webpack_require__(17);
-const FeedBacks_repository_1 = __webpack_require__(23);
-const transformer_middleware_1 = __webpack_require__(27);
-const jwt_1 = __webpack_require__(29);
+const mongoose_1 = __webpack_require__(4);
+const config_1 = __webpack_require__(5);
 const core_1 = __webpack_require__(1);
-const auth_guards_1 = __webpack_require__(30);
-const Users_service_1 = __webpack_require__(31);
-const Users_repository_1 = __webpack_require__(33);
-const roles_guards_1 = __webpack_require__(34);
-const Roles_repository_1 = __webpack_require__(32);
-const PurchaseInformation_controller_1 = __webpack_require__(35);
-const PurchaseInformation_service_1 = __webpack_require__(39);
-const PurchaseInformation_repository_1 = __webpack_require__(40);
-const mangament_controller_1 = __webpack_require__(41);
-const axios_1 = __webpack_require__(43);
-const Mangament_service_1 = __webpack_require__(42);
-const Feedbacks_controller_1 = __webpack_require__(45);
-const FeedBacks_service_1 = __webpack_require__(49);
+const axios_1 = __webpack_require__(6);
+const customer_information_module_1 = __webpack_require__(7);
+const feedbacks_module_1 = __webpack_require__(29);
+const purchase_information_module_1 = __webpack_require__(36);
+const mangament_module_1 = __webpack_require__(42);
+const jwt_1 = __webpack_require__(46);
+const Users_repository_1 = __webpack_require__(47);
+const Roles_repository_1 = __webpack_require__(48);
+const Users_service_1 = __webpack_require__(49);
+const Models_1 = __webpack_require__(27);
+const auth_guards_1 = __webpack_require__(50);
+const roles_guards_1 = __webpack_require__(51);
+const transformer_middleware_1 = __webpack_require__(52);
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -68,24 +61,16 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
             }),
-        ],
-        controllers: [
-            CustomerInformation_controller_1.CustomerInformationController,
-            PurchaseInformation_controller_1.PurchaseInformationController,
-            Feedbacks_controller_1.FeedbacksController,
-            mangament_controller_1.MangamentController,
+            customer_information_module_1.CustomerInformationModule,
+            feedbacks_module_1.FeedbacksModule,
+            purchase_information_module_1.PurchaseInformationModule,
+            mangament_module_1.MangamentModule,
         ],
         providers: [
             jwt_1.JwtService,
-            FeedBacks_repository_1.FeedbacksRepository,
             Users_repository_1.UsersRepository,
             Roles_repository_1.RolesRepository,
-            CustomerInformation_repository_1.CustomerInformationRepository,
-            PurchaseInformation_repository_1.PurchaseInformationRepository,
-            CustomerInformation_service_1.CustomerInformationService,
-            PurchaseInformation_service_1.PurchaseInformationService,
-            FeedBacks_service_1.FeedBacksService,
-            Mangament_service_1.MangamentService,
+            config_1.ConfigService,
             Users_service_1.UsersService,
             {
                 provide: core_1.APP_GUARD,
@@ -108,6 +93,60 @@ module.exports = require("@nestjs/common");
 
 /***/ }),
 /* 4 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/mongoose");
+
+/***/ }),
+/* 5 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/config");
+
+/***/ }),
+/* 6 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/axios");
+
+/***/ }),
+/* 7 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CustomerInformationModule = void 0;
+const common_1 = __webpack_require__(3);
+const customer_information_controller_1 = __webpack_require__(8);
+const CustomerInformation_service_1 = __webpack_require__(19);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const FeedBacks_repository_1 = __webpack_require__(26);
+const mongoose_1 = __webpack_require__(4);
+const Models_1 = __webpack_require__(27);
+let CustomerInformationModule = class CustomerInformationModule {
+};
+exports.CustomerInformationModule = CustomerInformationModule;
+exports.CustomerInformationModule = CustomerInformationModule = __decorate([
+    (0, common_1.Module)({
+        imports: [mongoose_1.MongooseModule.forFeature(Models_1.default)],
+        controllers: [customer_information_controller_1.CustomerInformationController],
+        providers: [
+            FeedBacks_repository_1.FeedbacksRepository,
+            CustomerInformation_repository_1.CustomerInformationRepository,
+            CustomerInformation_service_1.CustomerInformationService,
+        ],
+    })
+], CustomerInformationModule);
+
+
+/***/ }),
+/* 8 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -126,15 +165,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationController = void 0;
-const customerInformation_create_dto_1 = __webpack_require__(5);
-const customerInformation_query_dto_1 = __webpack_require__(8);
-const customerInformation_update_dto_1 = __webpack_require__(9);
+const customerInformation_create_dto_1 = __webpack_require__(9);
+const customerInformation_query_dto_1 = __webpack_require__(12);
+const customerInformation_update_dto_1 = __webpack_require__(13);
 const common_1 = __webpack_require__(3);
-const roles_decorator_1 = __webpack_require__(10);
-const users_decorator_1 = __webpack_require__(11);
-const Roles_entity_1 = __webpack_require__(12);
-const Users_entity_1 = __webpack_require__(14);
-const CustomerInformation_service_1 = __webpack_require__(16);
+const users_decorator_1 = __webpack_require__(14);
+const roles_decorator_1 = __webpack_require__(15);
+const Roles_entity_1 = __webpack_require__(16);
+const Users_entity_1 = __webpack_require__(17);
+const CustomerInformation_service_1 = __webpack_require__(19);
 let CustomerInformationController = class CustomerInformationController {
     constructor(customerInformationService) {
         this.customerInformationService = customerInformationService;
@@ -192,7 +231,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CustomerInformationController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(),
+    (0, common_1.Delete)(':id'),
     (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.DELETE, subject: Roles_entity_1.SUBJECT.customer }),
     __param(0, (0, users_decorator_1.User)()),
     __metadata("design:type", Function),
@@ -206,7 +245,7 @@ exports.CustomerInformationController = CustomerInformationController = __decora
 
 
 /***/ }),
-/* 5 */
+/* 9 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -221,8 +260,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationCreateDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
 class CustomerInformationCreateDTO {
 }
 exports.CustomerInformationCreateDTO = CustomerInformationCreateDTO;
@@ -351,19 +390,19 @@ __decorate([
 
 
 /***/ }),
-/* 6 */
+/* 10 */
 /***/ ((module) => {
 
 module.exports = require("@nestjs/swagger");
 
 /***/ }),
-/* 7 */
+/* 11 */
 /***/ ((module) => {
 
 module.exports = require("class-validator");
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -378,8 +417,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationQueryDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
 class CustomerInformationQueryDTO {
 }
 exports.CustomerInformationQueryDTO = CustomerInformationQueryDTO;
@@ -416,7 +455,7 @@ __decorate([
 
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -431,9 +470,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationUpdateDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-const customerInformation_create_dto_1 = __webpack_require__(5);
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+const customerInformation_create_dto_1 = __webpack_require__(9);
 class CustomerInformationUpdateDTO extends customerInformation_create_dto_1.CustomerInformationCreateDTO {
 }
 exports.CustomerInformationUpdateDTO = CustomerInformationUpdateDTO;
@@ -448,7 +487,21 @@ __decorate([
 
 
 /***/ }),
-/* 10 */
+/* 14 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.User = void 0;
+const common_1 = __webpack_require__(3);
+exports.User = (0, common_1.createParamDecorator)((data, ctx) => {
+    const request = ctx.switchToHttp().getRequest();
+    return request.user;
+});
+
+
+/***/ }),
+/* 15 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -463,21 +516,7 @@ exports.Roles = Roles;
 
 
 /***/ }),
-/* 11 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.User = void 0;
-const common_1 = __webpack_require__(3);
-exports.User = (0, common_1.createParamDecorator)((data, ctx) => {
-    const request = ctx.switchToHttp().getRequest();
-    return request.user;
-});
-
-
-/***/ }),
-/* 12 */
+/* 16 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -493,7 +532,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RolesSchema = exports.Roles = exports.TYPEROLE = exports.SUBJECT = exports.ACTION = void 0;
-const mongoose_1 = __webpack_require__(13);
+const mongoose_1 = __webpack_require__(4);
 var ACTION;
 (function (ACTION) {
     ACTION["CREATE"] = "CREATE";
@@ -542,13 +581,7 @@ exports.RolesSchema = mongoose_1.SchemaFactory.createForClass(Roles);
 
 
 /***/ }),
-/* 13 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/mongoose");
-
-/***/ }),
-/* 14 */
+/* 17 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -563,9 +596,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UsersSchema = exports.Users = void 0;
-const mongoose_1 = __webpack_require__(13);
-const mongoose_2 = __webpack_require__(15);
-const Roles_entity_1 = __webpack_require__(12);
+const mongoose_1 = __webpack_require__(4);
+const mongoose_2 = __webpack_require__(18);
+const Roles_entity_1 = __webpack_require__(16);
 let Users = class Users {
 };
 exports.Users = Users;
@@ -614,13 +647,13 @@ exports.UsersSchema = mongoose_1.SchemaFactory.createForClass(Users);
 
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ ((module) => {
 
 module.exports = require("mongoose");
 
 /***/ }),
-/* 16 */
+/* 19 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -648,8 +681,8 @@ var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationService = void 0;
 const common_1 = __webpack_require__(3);
-const CustomerInformation_repository_1 = __webpack_require__(17);
-const FeedBacks_repository_1 = __webpack_require__(23);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const FeedBacks_repository_1 = __webpack_require__(26);
 let CustomerInformationService = class CustomerInformationService {
     constructor(customerInformationRepository, feedbacksRepository) {
         this.customerInformationRepository = customerInformationRepository;
@@ -708,7 +741,7 @@ exports.CustomerInformationService = CustomerInformationService = __decorate([
 
 
 /***/ }),
-/* 17 */
+/* 20 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -728,10 +761,10 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationRepository = void 0;
 const common_1 = __webpack_require__(3);
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const base_repository_1 = __webpack_require__(18);
-const CustomerInformation_entity_1 = __webpack_require__(19);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const base_repository_1 = __webpack_require__(21);
+const CustomerInformation_entity_1 = __webpack_require__(22);
 let CustomerInformationRepository = class CustomerInformationRepository extends base_repository_1.BaseRepositoryAbstract {
     constructor(customerInformation_model) {
         super(customerInformation_model);
@@ -759,7 +792,7 @@ exports.CustomerInformationRepository = CustomerInformationRepository = __decora
 
 
 /***/ }),
-/* 18 */
+/* 21 */
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -814,7 +847,7 @@ exports.BaseRepositoryAbstract = BaseRepositoryAbstract;
 
 
 /***/ }),
-/* 19 */
+/* 22 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -830,12 +863,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CustomerInformationSchema = exports.CustomerInformation = void 0;
-const PurchaseInformation_entity_1 = __webpack_require__(20);
-const mongoose_1 = __webpack_require__(13);
-const class_transformer_1 = __webpack_require__(21);
-const mongoose = __webpack_require__(15);
-const feedbacks_entity_1 = __webpack_require__(22);
-const Users_entity_1 = __webpack_require__(14);
+const PurchaseInformation_entity_1 = __webpack_require__(23);
+const mongoose_1 = __webpack_require__(4);
+const class_transformer_1 = __webpack_require__(24);
+const mongoose = __webpack_require__(18);
+const feedbacks_entity_1 = __webpack_require__(25);
+const Users_entity_1 = __webpack_require__(17);
 let CustomerInformation = class CustomerInformation {
 };
 exports.CustomerInformation = CustomerInformation;
@@ -937,7 +970,7 @@ exports.CustomerInformationSchema = mongoose_1.SchemaFactory.createForClass(Cust
 
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -953,12 +986,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PurchaseInformationSchema = exports.PurchaseInformation = void 0;
-const mongoose_1 = __webpack_require__(13);
-const mongoose_2 = __webpack_require__(15);
-const Users_entity_1 = __webpack_require__(14);
-const class_transformer_1 = __webpack_require__(21);
-const feedbacks_entity_1 = __webpack_require__(22);
-const CustomerInformation_entity_1 = __webpack_require__(19);
+const mongoose_1 = __webpack_require__(4);
+const mongoose_2 = __webpack_require__(18);
+const Users_entity_1 = __webpack_require__(17);
+const class_transformer_1 = __webpack_require__(24);
+const feedbacks_entity_1 = __webpack_require__(25);
+const CustomerInformation_entity_1 = __webpack_require__(22);
 let PurchaseInformation = class PurchaseInformation {
 };
 exports.PurchaseInformation = PurchaseInformation;
@@ -1038,13 +1071,13 @@ exports.PurchaseInformationSchema = mongoose_1.SchemaFactory.createForClass(Purc
 
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ ((module) => {
 
 module.exports = require("class-transformer");
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1060,10 +1093,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FeedbacksSchema = exports.Feedbacks = void 0;
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const class_transformer_1 = __webpack_require__(21);
-const Users_entity_1 = __webpack_require__(14);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const class_transformer_1 = __webpack_require__(24);
+const Users_entity_1 = __webpack_require__(17);
 let Feedbacks = class Feedbacks {
 };
 exports.Feedbacks = Feedbacks;
@@ -1115,7 +1148,7 @@ exports.FeedbacksSchema = mongoose_2.SchemaFactory.createForClass(Feedbacks);
 
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1135,10 +1168,10 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FeedbacksRepository = void 0;
 const common_1 = __webpack_require__(3);
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const base_repository_1 = __webpack_require__(18);
-const feedbacks_entity_1 = __webpack_require__(22);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const base_repository_1 = __webpack_require__(21);
+const feedbacks_entity_1 = __webpack_require__(25);
 let FeedbacksRepository = class FeedbacksRepository extends base_repository_1.BaseRepositoryAbstract {
     constructor(feedbacks_model) {
         super(feedbacks_model);
@@ -1169,23 +1202,17 @@ exports.FeedbacksRepository = FeedbacksRepository = __decorate([
 
 
 /***/ }),
-/* 24 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/config");
-
-/***/ }),
-/* 25 */
+/* 27 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const CustomerInformation_entity_1 = __webpack_require__(19);
-const PurchaseInformation_entity_1 = __webpack_require__(20);
-const expenses_entity_1 = __webpack_require__(26);
-const feedbacks_entity_1 = __webpack_require__(22);
-const Users_entity_1 = __webpack_require__(14);
-const Roles_entity_1 = __webpack_require__(12);
+const CustomerInformation_entity_1 = __webpack_require__(22);
+const PurchaseInformation_entity_1 = __webpack_require__(23);
+const expenses_entity_1 = __webpack_require__(28);
+const feedbacks_entity_1 = __webpack_require__(25);
+const Users_entity_1 = __webpack_require__(17);
+const Roles_entity_1 = __webpack_require__(16);
 const entities = [
     { name: CustomerInformation_entity_1.CustomerInformation.name, schema: CustomerInformation_entity_1.CustomerInformationSchema },
     { name: expenses_entity_1.Expenses.name, schema: expenses_entity_1.ExpensesSchema },
@@ -1198,7 +1225,7 @@ exports["default"] = entities;
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1214,10 +1241,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ExpensesSchema = exports.Expenses = void 0;
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const PurchaseInformation_entity_1 = __webpack_require__(20);
-const Users_entity_1 = __webpack_require__(14);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const PurchaseInformation_entity_1 = __webpack_require__(23);
+const Users_entity_1 = __webpack_require__(17);
 let Expenses = class Expenses {
 };
 exports.Expenses = Expenses;
@@ -1256,7 +1283,1329 @@ exports.ExpensesSchema = mongoose_2.SchemaFactory.createForClass(Expenses);
 
 
 /***/ }),
-/* 27 */
+/* 29 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FeedbacksModule = void 0;
+const common_1 = __webpack_require__(3);
+const feedbacks_controller_1 = __webpack_require__(30);
+const FeedBacks_service_1 = __webpack_require__(34);
+const mongoose_1 = __webpack_require__(4);
+const Models_1 = __webpack_require__(27);
+const FeedBacks_repository_1 = __webpack_require__(26);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const PurchaseInformation_repository_1 = __webpack_require__(35);
+let FeedbacksModule = class FeedbacksModule {
+};
+exports.FeedbacksModule = FeedbacksModule;
+exports.FeedbacksModule = FeedbacksModule = __decorate([
+    (0, common_1.Module)({
+        imports: [mongoose_1.MongooseModule.forFeature(Models_1.default)],
+        controllers: [feedbacks_controller_1.FeedbacksController],
+        providers: [
+            FeedBacks_repository_1.FeedbacksRepository,
+            CustomerInformation_repository_1.CustomerInformationRepository,
+            PurchaseInformation_repository_1.PurchaseInformationRepository,
+            FeedBacks_service_1.FeedBacksService,
+        ],
+    })
+], FeedbacksModule);
+
+
+/***/ }),
+/* 30 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FeedbacksController = void 0;
+const feedbacks_create_dto_1 = __webpack_require__(31);
+const feedbacks_query_dto_1 = __webpack_require__(32);
+const feedbacks_update_dto_1 = __webpack_require__(33);
+const common_1 = __webpack_require__(3);
+const users_decorator_1 = __webpack_require__(14);
+const roles_decorator_1 = __webpack_require__(15);
+const Roles_entity_1 = __webpack_require__(16);
+const Users_entity_1 = __webpack_require__(17);
+const FeedBacks_service_1 = __webpack_require__(34);
+let FeedbacksController = class FeedbacksController {
+    constructor(feedbacksService) {
+        this.feedbacksService = feedbacksService;
+    }
+    query(user, query) {
+        return this.feedbacksService.query(user, query);
+    }
+    getById(id, user) {
+        return this.feedbacksService.getById(id, user);
+    }
+    create(user, data) {
+        return this.feedbacksService.create(user, data);
+    }
+    update(user, data) {
+        return this.feedbacksService.update(user, data);
+    }
+    deleteInfo(user) {
+    }
+};
+exports.FeedbacksController = FeedbacksController;
+__decorate([
+    (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.feedBacks }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object, typeof (_c = typeof feedbacks_query_dto_1.FeedBacksQueryDTO !== "undefined" && feedbacks_query_dto_1.FeedBacksQueryDTO) === "function" ? _c : Object]),
+    __metadata("design:returntype", void 0)
+], FeedbacksController.prototype, "query", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.customer }),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, users_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_d = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _d : Object]),
+    __metadata("design:returntype", void 0)
+], FeedbacksController.prototype, "getById", null);
+__decorate([
+    (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.CREATE, subject: Roles_entity_1.SUBJECT.feedBacks }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_e = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _e : Object, typeof (_f = typeof feedbacks_create_dto_1.FeedBacksCreateDTO !== "undefined" && feedbacks_create_dto_1.FeedBacksCreateDTO) === "function" ? _f : Object]),
+    __metadata("design:returntype", void 0)
+], FeedbacksController.prototype, "create", null);
+__decorate([
+    (0, common_1.Put)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.UPDATE, subject: Roles_entity_1.SUBJECT.feedBacks }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_g = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _g : Object, typeof (_h = typeof feedbacks_update_dto_1.FeedBacksUpdateDTO !== "undefined" && feedbacks_update_dto_1.FeedBacksUpdateDTO) === "function" ? _h : Object]),
+    __metadata("design:returntype", void 0)
+], FeedbacksController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(),
+    (0, roles_decorator_1.Roles)({
+        role: Roles_entity_1.TYPEROLE.ADMIN,
+        action: Roles_entity_1.ACTION.DELETE,
+        subject: Roles_entity_1.SUBJECT.feedBacks,
+    }),
+    __param(0, (0, users_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_j = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _j : Object]),
+    __metadata("design:returntype", void 0)
+], FeedbacksController.prototype, "deleteInfo", null);
+exports.FeedbacksController = FeedbacksController = __decorate([
+    (0, common_1.Controller)('feedbacks'),
+    __metadata("design:paramtypes", [typeof (_a = typeof FeedBacks_service_1.FeedBacksService !== "undefined" && FeedBacks_service_1.FeedBacksService) === "function" ? _a : Object])
+], FeedbacksController);
+
+
+/***/ }),
+/* 31 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FeedBacksCreateDTO = void 0;
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+class FeedBacksCreateDTO {
+}
+exports.FeedBacksCreateDTO = FeedBacksCreateDTO;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: '',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksCreateDTO.prototype, "idInfo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: '',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksCreateDTO.prototype, "idPurchase", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'tên sản phẩm',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksCreateDTO.prototype, "product", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'nhận xét của khách hàng',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksCreateDTO.prototype, "comment", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'khuyên nghị của khách hàng',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksCreateDTO.prototype, "recommendations", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'gợi ý của khách hàng cho sản phẩm',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksCreateDTO.prototype, "suggestion", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'số sao đánh giá 1 - 5',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], FeedBacksCreateDTO.prototype, "rate", void 0);
+
+
+/***/ }),
+/* 32 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FeedBacksQueryDTO = exports.QueryDTO = void 0;
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+class QueryDTO {
+}
+exports.QueryDTO = QueryDTO;
+class FeedBacksQueryDTO {
+}
+exports.FeedBacksQueryDTO = FeedBacksQueryDTO;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    __metadata("design:type", QueryDTO)
+], FeedBacksQueryDTO.prototype, "conditions", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], FeedBacksQueryDTO.prototype, "skip", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], FeedBacksQueryDTO.prototype, "limit", void 0);
+
+
+/***/ }),
+/* 33 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FeedBacksUpdateDTO = void 0;
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+const feedbacks_create_dto_1 = __webpack_require__(31);
+class FeedBacksUpdateDTO extends feedbacks_create_dto_1.FeedBacksCreateDTO {
+}
+exports.FeedBacksUpdateDTO = FeedBacksUpdateDTO;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'id khach hang',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], FeedBacksUpdateDTO.prototype, "id", void 0);
+
+
+/***/ }),
+/* 34 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FeedBacksService = void 0;
+const common_1 = __webpack_require__(3);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const FeedBacks_repository_1 = __webpack_require__(26);
+const PurchaseInformation_repository_1 = __webpack_require__(35);
+let FeedBacksService = class FeedBacksService {
+    constructor(feedbacksRepository, customerInformationRepository, purchaseInformationRepository) {
+        this.feedbacksRepository = feedbacksRepository;
+        this.customerInformationRepository = customerInformationRepository;
+        this.purchaseInformationRepository = purchaseInformationRepository;
+    }
+    async create(user, data) {
+        data.ComId = user.ComId;
+        const customer = await this.customerInformationRepository.findOneById(data.idInfo);
+        if (!customer)
+            throw new common_1.NotFoundException();
+        if (customer && customer.ComId !== data.ComId)
+            throw new common_1.ForbiddenException();
+        const purchase = await this.purchaseInformationRepository.findOneById(data.idPurchase);
+        if (!purchase)
+            throw new common_1.NotFoundException();
+        if (purchase && purchase.ComId !== data.ComId)
+            throw new common_1.ForbiddenException();
+        const feedback = await this.feedbacksRepository.create(data);
+        customer.feedBacks = [...customer.feedBacks, feedback];
+        await customer.save();
+        purchase.feedBack = feedback;
+        await purchase.save();
+        return feedback;
+    }
+    async query(user, query) {
+        return this.feedbacksRepository.findAllByCompany(user.ComId, query);
+    }
+    async getById(id, user) {
+        const feedBack = await this.feedbacksRepository.findOneById(id);
+        if (!feedBack)
+            throw new common_1.NotFoundException();
+        console.log('service', Object.assign(Object.assign({}, feedBack), { secret: user.secret }));
+        return Object.assign(Object.assign({}, feedBack), { secret: user.secret });
+    }
+    async update(user, feedBack) {
+        const infoCustom = await this.feedbacksRepository.findOneById(feedBack.id);
+        if (!infoCustom)
+            throw new common_1.NotFoundException();
+        if (infoCustom.ComId !== user.ComId)
+            throw new common_1.ForbiddenException();
+        const customer = await this.customerInformationRepository.findOneById(feedBack.idInfo);
+        if (!customer)
+            throw new common_1.ForbiddenException();
+        const purchase = await this.purchaseInformationRepository.findOneById(feedBack.idPurchase);
+        await this.feedbacksRepository.update(feedBack.id, Object.assign(Object.assign({}, feedBack), { isHidden: true }));
+        const newFeedBack = await this.create(user, feedBack);
+        customer.feedBacks = [
+            ...customer.feedBacks.filter((item) => item.id !== feedBack.id),
+            newFeedBack,
+        ];
+        purchase.feedBack = newFeedBack;
+        await customer.save();
+        await purchase.save();
+        return newFeedBack;
+    }
+    async deleteFeedbacks(user, id) {
+        const infoCustom = await this.feedbacksRepository.findOneById(id);
+        if (!infoCustom)
+            throw new common_1.NotFoundException();
+        if (infoCustom.ComId !== user.ComId)
+            throw new common_1.ForbiddenException();
+        return this.feedbacksRepository.softDelete(id);
+    }
+};
+exports.FeedBacksService = FeedBacksService;
+exports.FeedBacksService = FeedBacksService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof FeedBacks_repository_1.FeedbacksRepository !== "undefined" && FeedBacks_repository_1.FeedbacksRepository) === "function" ? _a : Object, typeof (_b = typeof CustomerInformation_repository_1.CustomerInformationRepository !== "undefined" && CustomerInformation_repository_1.CustomerInformationRepository) === "function" ? _b : Object, typeof (_c = typeof PurchaseInformation_repository_1.PurchaseInformationRepository !== "undefined" && PurchaseInformation_repository_1.PurchaseInformationRepository) === "function" ? _c : Object])
+], FeedBacksService);
+
+
+/***/ }),
+/* 35 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationRepository = void 0;
+const common_1 = __webpack_require__(3);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const base_repository_1 = __webpack_require__(21);
+const PurchaseInformation_entity_1 = __webpack_require__(23);
+let PurchaseInformationRepository = class PurchaseInformationRepository extends base_repository_1.BaseRepositoryAbstract {
+    constructor(purchaseInformation) {
+        super(purchaseInformation);
+        this.purchaseInformation = purchaseInformation;
+    }
+    async findAllByCompany(ComId, query) {
+        const [count, items] = await Promise.all([
+            this.purchaseInformation.count({
+                ComId: ComId,
+                deleted_at: null,
+            }),
+            this.purchaseInformation
+                .find({ ComId: ComId, deleted_at: null })
+                .skip(query.skip)
+                .limit(query.limit),
+            ,
+        ]);
+        return { count, items };
+    }
+};
+exports.PurchaseInformationRepository = PurchaseInformationRepository;
+exports.PurchaseInformationRepository = PurchaseInformationRepository = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_2.InjectModel)(PurchaseInformation_entity_1.PurchaseInformation.name)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
+], PurchaseInformationRepository);
+
+
+/***/ }),
+/* 36 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationModule = void 0;
+const common_1 = __webpack_require__(3);
+const purchase_information_controller_1 = __webpack_require__(37);
+const PurchaseInformation_service_1 = __webpack_require__(41);
+const PurchaseInformation_repository_1 = __webpack_require__(35);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const mongoose_1 = __webpack_require__(4);
+const Models_1 = __webpack_require__(27);
+let PurchaseInformationModule = class PurchaseInformationModule {
+};
+exports.PurchaseInformationModule = PurchaseInformationModule;
+exports.PurchaseInformationModule = PurchaseInformationModule = __decorate([
+    (0, common_1.Module)({
+        imports: [mongoose_1.MongooseModule.forFeature(Models_1.default)],
+        controllers: [purchase_information_controller_1.PurchaseInformationController],
+        providers: [
+            PurchaseInformation_repository_1.PurchaseInformationRepository,
+            CustomerInformation_repository_1.CustomerInformationRepository,
+            PurchaseInformation_service_1.PurchaseInformationService,
+        ],
+    })
+], PurchaseInformationModule);
+
+
+/***/ }),
+/* 37 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationController = void 0;
+const purchaseInformation_create_dto_1 = __webpack_require__(38);
+const purchaseInformation_query_dto_1 = __webpack_require__(39);
+const purchaseInformation_update_dto_1 = __webpack_require__(40);
+const common_1 = __webpack_require__(3);
+const users_decorator_1 = __webpack_require__(14);
+const roles_decorator_1 = __webpack_require__(15);
+const Roles_entity_1 = __webpack_require__(16);
+const Users_entity_1 = __webpack_require__(17);
+const PurchaseInformation_service_1 = __webpack_require__(41);
+let PurchaseInformationController = class PurchaseInformationController {
+    constructor(purchaseInformationService) {
+        this.purchaseInformationService = purchaseInformationService;
+    }
+    query(user, query) {
+        return this.purchaseInformationService.query(user, query);
+    }
+    getById(id, user) {
+        return this.purchaseInformationService.getById(id, user);
+    }
+    create(user, data) {
+        return this.purchaseInformationService.create(user, data);
+    }
+    update(user, data) {
+        return this.purchaseInformationService.update(user, data);
+    }
+    deleteInfo(user) {
+    }
+};
+exports.PurchaseInformationController = PurchaseInformationController;
+__decorate([
+    (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.purchase }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object, typeof (_c = typeof purchaseInformation_query_dto_1.PurchaseInformationQueryDTO !== "undefined" && purchaseInformation_query_dto_1.PurchaseInformationQueryDTO) === "function" ? _c : Object]),
+    __metadata("design:returntype", void 0)
+], PurchaseInformationController.prototype, "query", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.customer }),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, users_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_d = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _d : Object]),
+    __metadata("design:returntype", void 0)
+], PurchaseInformationController.prototype, "getById", null);
+__decorate([
+    (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.CREATE, subject: Roles_entity_1.SUBJECT.purchase }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_e = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _e : Object, typeof (_f = typeof purchaseInformation_create_dto_1.PurchaseInformationCreateDTO !== "undefined" && purchaseInformation_create_dto_1.PurchaseInformationCreateDTO) === "function" ? _f : Object]),
+    __metadata("design:returntype", void 0)
+], PurchaseInformationController.prototype, "create", null);
+__decorate([
+    (0, common_1.Put)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.UPDATE, subject: Roles_entity_1.SUBJECT.purchase }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_g = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _g : Object, typeof (_h = typeof purchaseInformation_update_dto_1.PurchaseInformationUpdateDTO !== "undefined" && purchaseInformation_update_dto_1.PurchaseInformationUpdateDTO) === "function" ? _h : Object]),
+    __metadata("design:returntype", void 0)
+], PurchaseInformationController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.DELETE, subject: Roles_entity_1.SUBJECT.purchase }),
+    __param(0, (0, users_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_j = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _j : Object]),
+    __metadata("design:returntype", void 0)
+], PurchaseInformationController.prototype, "deleteInfo", null);
+exports.PurchaseInformationController = PurchaseInformationController = __decorate([
+    (0, common_1.Controller)('PurchaseInformation'),
+    __metadata("design:paramtypes", [typeof (_a = typeof PurchaseInformation_service_1.PurchaseInformationService !== "undefined" && PurchaseInformation_service_1.PurchaseInformationService) === "function" ? _a : Object])
+], PurchaseInformationController);
+
+
+/***/ }),
+/* 38 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationCreateDTO = void 0;
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+class PurchaseInformationCreateDTO {
+}
+exports.PurchaseInformationCreateDTO = PurchaseInformationCreateDTO;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "product", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "currencyUnit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "describe", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "quantity", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "unit", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "price", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "transportFee", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "paymentTime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationCreateDTO.prototype, "idUser", void 0);
+
+
+/***/ }),
+/* 39 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationQueryDTO = void 0;
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+class PurchaseInformationQueryDTO {
+}
+exports.PurchaseInformationQueryDTO = PurchaseInformationQueryDTO;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], PurchaseInformationQueryDTO.prototype, "skip", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'asaa',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], PurchaseInformationQueryDTO.prototype, "limit", void 0);
+
+
+/***/ }),
+/* 40 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationUpdateDTO = void 0;
+const swagger_1 = __webpack_require__(10);
+const class_validator_1 = __webpack_require__(11);
+const purchaseInformation_create_dto_1 = __webpack_require__(38);
+class PurchaseInformationUpdateDTO extends purchaseInformation_create_dto_1.PurchaseInformationCreateDTO {
+}
+exports.PurchaseInformationUpdateDTO = PurchaseInformationUpdateDTO;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '',
+        description: 'id khach hang',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], PurchaseInformationUpdateDTO.prototype, "id", void 0);
+
+
+/***/ }),
+/* 41 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PurchaseInformationService = void 0;
+const common_1 = __webpack_require__(3);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const PurchaseInformation_repository_1 = __webpack_require__(35);
+let PurchaseInformationService = class PurchaseInformationService {
+    constructor(purchaseInformationRepository, customerInformationRepository) {
+        this.purchaseInformationRepository = purchaseInformationRepository;
+        this.customerInformationRepository = customerInformationRepository;
+    }
+    async create(user, data) {
+        data.ComId = user.ComId;
+        const infoCustom = await this.customerInformationRepository.findOneById(data.idUser);
+        if (!infoCustom)
+            throw new common_1.NotFoundException('cannot find customer by id');
+        const information = await this.purchaseInformationRepository.create(data);
+        infoCustom.purchases.push(information);
+        await infoCustom.save();
+        information.customer = infoCustom;
+        await information.save();
+        const newInfomationCustom = await (await this.customerInformationRepository.findOneById(data.idUser)).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+        return Object.assign(Object.assign({}, newInfomationCustom), { _doc: Object.assign(Object.assign({}, newInfomationCustom._doc), { star: newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                    newInfomationCustom.feedBacks.length || 0 }), secret: user.secret });
+    }
+    async query(user, query) {
+        return Object.assign(Object.assign({}, (await this.purchaseInformationRepository.findAllByCompany(user.ComId, query))), { secret: user.secret });
+    }
+    async getById(id, user) {
+        const purchase = await this.purchaseInformationRepository.findOneById(id);
+        if (!purchase)
+            throw new common_1.NotFoundException();
+        console.log('service', Object.assign(Object.assign({}, purchase), { secret: user.secret }));
+        return Object.assign(Object.assign({}, purchase), { secret: user.secret });
+    }
+    async update(user, info) {
+        const infoCustom = await this.purchaseInformationRepository.findOneById(info.id);
+        if (!infoCustom)
+            throw new common_1.NotFoundException();
+        if (infoCustom.ComId !== user.ComId)
+            throw new common_1.ForbiddenException();
+        await this.purchaseInformationRepository.update(info.id, Object.assign(Object.assign({}, info), { isHidden: true }));
+        const newInfomationCustom = await (await this.customerInformationRepository.findOneById(info.idUser)).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
+        await this.create(user, info);
+        return Object.assign(Object.assign({}, newInfomationCustom), { _doc: Object.assign(Object.assign({}, newInfomationCustom._doc), { star: newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
+                    newInfomationCustom.feedBacks.length || 0 }) });
+    }
+    async deletePurchase(user, id) {
+        const infoCustom = await this.purchaseInformationRepository.findOneById(id);
+        if (!infoCustom)
+            throw new common_1.NotFoundException();
+        if (infoCustom.ComId !== user.ComId)
+            throw new common_1.ForbiddenException();
+        return this.purchaseInformationRepository.softDelete(id);
+    }
+};
+exports.PurchaseInformationService = PurchaseInformationService;
+exports.PurchaseInformationService = PurchaseInformationService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof PurchaseInformation_repository_1.PurchaseInformationRepository !== "undefined" && PurchaseInformation_repository_1.PurchaseInformationRepository) === "function" ? _a : Object, typeof (_b = typeof CustomerInformation_repository_1.CustomerInformationRepository !== "undefined" && CustomerInformation_repository_1.CustomerInformationRepository) === "function" ? _b : Object])
+], PurchaseInformationService);
+
+
+/***/ }),
+/* 42 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MangamentModule = void 0;
+const common_1 = __webpack_require__(3);
+const mangament_controller_1 = __webpack_require__(43);
+const Mangament_service_1 = __webpack_require__(44);
+const mongoose_1 = __webpack_require__(4);
+const Models_1 = __webpack_require__(27);
+const FeedBacks_repository_1 = __webpack_require__(26);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const PurchaseInformation_repository_1 = __webpack_require__(35);
+const axios_1 = __webpack_require__(6);
+let MangamentModule = class MangamentModule {
+};
+exports.MangamentModule = MangamentModule;
+exports.MangamentModule = MangamentModule = __decorate([
+    (0, common_1.Module)({
+        imports: [axios_1.HttpModule, mongoose_1.MongooseModule.forFeature(Models_1.default)],
+        controllers: [mangament_controller_1.MangamentController],
+        providers: [
+            FeedBacks_repository_1.FeedbacksRepository,
+            CustomerInformation_repository_1.CustomerInformationRepository,
+            PurchaseInformation_repository_1.PurchaseInformationRepository,
+            Mangament_service_1.MangamentService,
+        ],
+    })
+], MangamentModule);
+
+
+/***/ }),
+/* 43 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c, _d, _e, _f, _g;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MangamentController = void 0;
+const customerInformation_create_dto_1 = __webpack_require__(9);
+const customerInformation_update_dto_1 = __webpack_require__(13);
+const common_1 = __webpack_require__(3);
+const users_decorator_1 = __webpack_require__(14);
+const roles_decorator_1 = __webpack_require__(15);
+const Roles_entity_1 = __webpack_require__(16);
+const Users_entity_1 = __webpack_require__(17);
+const Mangament_service_1 = __webpack_require__(44);
+let MangamentController = class MangamentController {
+    constructor(mangament) {
+        this.mangament = mangament;
+    }
+    getAllUser(user) {
+        return this.mangament.getAllUser(user);
+    }
+    create(user, data) {
+    }
+    update(user, data) {
+    }
+    deleteInfo(user) {
+    }
+};
+exports.MangamentController = MangamentController;
+__decorate([
+    (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)({
+        role: Roles_entity_1.TYPEROLE.ADMIN,
+        action: Roles_entity_1.ACTION.GET,
+        subject: Roles_entity_1.SUBJECT.customer,
+    }),
+    __param(0, (0, users_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object]),
+    __metadata("design:returntype", void 0)
+], MangamentController.prototype, "getAllUser", null);
+__decorate([
+    (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.CREATE, subject: Roles_entity_1.SUBJECT.customer }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_c = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _c : Object, typeof (_d = typeof customerInformation_create_dto_1.CustomerInformationCreateDTO !== "undefined" && customerInformation_create_dto_1.CustomerInformationCreateDTO) === "function" ? _d : Object]),
+    __metadata("design:returntype", void 0)
+], MangamentController.prototype, "create", null);
+__decorate([
+    (0, common_1.Put)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.UPDATE, subject: Roles_entity_1.SUBJECT.customer }),
+    __param(0, (0, users_decorator_1.User)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_e = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _e : Object, typeof (_f = typeof customerInformation_update_dto_1.CustomerInformationUpdateDTO !== "undefined" && customerInformation_update_dto_1.CustomerInformationUpdateDTO) === "function" ? _f : Object]),
+    __metadata("design:returntype", void 0)
+], MangamentController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(),
+    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.DELETE, subject: Roles_entity_1.SUBJECT.customer }),
+    __param(0, (0, users_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_g = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _g : Object]),
+    __metadata("design:returntype", void 0)
+], MangamentController.prototype, "deleteInfo", null);
+exports.MangamentController = MangamentController = __decorate([
+    (0, common_1.Controller)('mangament'),
+    __metadata("design:paramtypes", [typeof (_a = typeof Mangament_service_1.MangamentService !== "undefined" && Mangament_service_1.MangamentService) === "function" ? _a : Object])
+], MangamentController);
+
+
+/***/ }),
+/* 44 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b, _c, _d;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MangamentService = void 0;
+const axios_1 = __webpack_require__(6);
+const common_1 = __webpack_require__(3);
+const rxjs_1 = __webpack_require__(45);
+const CustomerInformation_repository_1 = __webpack_require__(20);
+const FeedBacks_repository_1 = __webpack_require__(26);
+const PurchaseInformation_repository_1 = __webpack_require__(35);
+let MangamentService = class MangamentService {
+    constructor(feedbacksRepository, customerInformationRepository, purchaseInformationRepository, httpService) {
+        this.feedbacksRepository = feedbacksRepository;
+        this.customerInformationRepository = customerInformationRepository;
+        this.purchaseInformationRepository = purchaseInformationRepository;
+        this.httpService = httpService;
+    }
+    async getAllUser(user) {
+        const params = {
+            ComId: user.ComId,
+        };
+        return this.httpService
+            .post('https://remindwork.com/api/MobileApiAccount/GetStaffOfCompany', params, {
+            headers: {
+                Authorization: 'Bearer ' + user.token,
+            },
+        })
+            .pipe((0, rxjs_1.map)((resp) => resp.data));
+    }
+    async create(user, data) {
+        data.ComId = user.ComId;
+        const customer = await this.customerInformationRepository.findOneById(data.idInfo);
+        if (!customer)
+            throw new common_1.ForbiddenException();
+        const purchase = await this.purchaseInformationRepository.findOneById(data.idPurchase);
+        const feedback = await this.feedbacksRepository.create(data);
+        customer.feedBacks = [...customer.feedBacks, feedback];
+        await customer.save();
+        purchase.feedBack = feedback;
+        await purchase.save();
+        return feedback;
+    }
+    converStringToJson(obj) {
+        try {
+            return JSON.parse(obj);
+        }
+        catch (ex) {
+            return null;
+        }
+    }
+    async query(user, query) {
+        query.conditions = this.converStringToJson(query.conditions);
+        return this.feedbacksRepository.findAllByCompany(user.ComId, query);
+    }
+    async update(user, feedBack) {
+        const infoCustom = await this.feedbacksRepository.findOneById(feedBack.id);
+        if (!infoCustom)
+            throw new common_1.NotFoundException();
+        if (infoCustom.ComId !== user.ComId)
+            throw new common_1.ForbiddenException();
+        const customer = await this.customerInformationRepository.findOneById(feedBack.idInfo);
+        if (!customer)
+            throw new common_1.ForbiddenException();
+        const purchase = await this.purchaseInformationRepository.findOneById(feedBack.idPurchase);
+        await this.feedbacksRepository.update(feedBack.id, Object.assign(Object.assign({}, feedBack), { isHidden: true }));
+        const newFeedBack = await this.create(user, feedBack);
+        customer.feedBacks = [
+            ...customer.feedBacks.filter((item) => item.id !== feedBack.id),
+            newFeedBack,
+        ];
+        purchase.feedBack = newFeedBack;
+        await customer.save();
+        await purchase.save();
+        return newFeedBack;
+    }
+    async deleteFeedbacks(user, id) {
+        const infoCustom = await this.feedbacksRepository.findOneById(id);
+        if (!infoCustom)
+            throw new common_1.NotFoundException();
+        if (infoCustom.ComId !== user.ComId)
+            throw new common_1.ForbiddenException();
+        return this.feedbacksRepository.softDelete(id);
+    }
+};
+exports.MangamentService = MangamentService;
+exports.MangamentService = MangamentService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof FeedBacks_repository_1.FeedbacksRepository !== "undefined" && FeedBacks_repository_1.FeedbacksRepository) === "function" ? _a : Object, typeof (_b = typeof CustomerInformation_repository_1.CustomerInformationRepository !== "undefined" && CustomerInformation_repository_1.CustomerInformationRepository) === "function" ? _b : Object, typeof (_c = typeof PurchaseInformation_repository_1.PurchaseInformationRepository !== "undefined" && PurchaseInformation_repository_1.PurchaseInformationRepository) === "function" ? _c : Object, typeof (_d = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _d : Object])
+], MangamentService);
+
+
+/***/ }),
+/* 45 */
+/***/ ((module) => {
+
+module.exports = require("rxjs");
+
+/***/ }),
+/* 46 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/jwt");
+
+/***/ }),
+/* 47 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UsersRepository = void 0;
+const common_1 = __webpack_require__(3);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const base_repository_1 = __webpack_require__(21);
+const Users_entity_1 = __webpack_require__(17);
+let UsersRepository = class UsersRepository extends base_repository_1.BaseRepositoryAbstract {
+    constructor(users) {
+        super(users);
+        this.users = users;
+    }
+    async findByUserId(id) {
+        return await this.users.findOne({ UserId: id }).populate('roles');
+    }
+};
+exports.UsersRepository = UsersRepository;
+exports.UsersRepository = UsersRepository = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_2.InjectModel)(Users_entity_1.Users.name)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
+], UsersRepository);
+
+
+/***/ }),
+/* 48 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RolesRepository = void 0;
+const common_1 = __webpack_require__(3);
+const mongoose_1 = __webpack_require__(18);
+const mongoose_2 = __webpack_require__(4);
+const base_repository_1 = __webpack_require__(21);
+const Roles_entity_1 = __webpack_require__(16);
+let RolesRepository = class RolesRepository extends base_repository_1.BaseRepositoryAbstract {
+    constructor(roles) {
+        super(roles);
+        this.roles = roles;
+    }
+};
+exports.RolesRepository = RolesRepository;
+exports.RolesRepository = RolesRepository = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_2.InjectModel)(Roles_entity_1.Roles.name)),
+    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
+], RolesRepository);
+
+
+/***/ }),
+/* 49 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UsersService = void 0;
+const common_1 = __webpack_require__(3);
+const Roles_repository_1 = __webpack_require__(48);
+const Users_repository_1 = __webpack_require__(47);
+let UsersService = class UsersService {
+    constructor(usersRepository, rolesRepository) {
+        this.usersRepository = usersRepository;
+        this.rolesRepository = rolesRepository;
+    }
+    async getUserById(id) {
+        return this.usersRepository.findByUserId(id);
+    }
+    async createUser(data) {
+        const user = await this.usersRepository.create(data);
+        return user;
+    }
+};
+exports.UsersService = UsersService;
+exports.UsersService = UsersService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof Users_repository_1.UsersRepository !== "undefined" && Users_repository_1.UsersRepository) === "function" ? _a : Object, typeof (_b = typeof Roles_repository_1.RolesRepository !== "undefined" && Roles_repository_1.RolesRepository) === "function" ? _b : Object])
+], UsersService);
+
+
+/***/ }),
+/* 50 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var AuthGuard_1;
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthGuard = void 0;
+const common_1 = __webpack_require__(3);
+const config_1 = __webpack_require__(5);
+const jwt_1 = __webpack_require__(46);
+const Users_service_1 = __webpack_require__(49);
+let AuthGuard = AuthGuard_1 = class AuthGuard {
+    constructor(jwtService, configService, usersService) {
+        this.jwtService = jwtService;
+        this.configService = configService;
+        this.usersService = usersService;
+    }
+    async canActivate(context) {
+        var _a;
+        const request = context.switchToHttp().getRequest();
+        const token = this.extractTokenFromHeader(request);
+        if (!token) {
+            throw new common_1.UnauthorizedException();
+        }
+        try {
+            const payload = await this.jwtService.verifyAsync(token, {
+                secret: this.configService.get('SECRET'),
+            });
+            let user = (_a = AuthGuard_1.users) === null || _a === void 0 ? void 0 : _a.find((item) => item.UserId === payload.UserId);
+            if (user) {
+                user = await this.usersService.getUserById(payload.UserId);
+                user.secret = payload.EncryptKey;
+                user.token = token;
+                AuthGuard_1.users.push(user);
+            }
+            if (!user)
+                user = await this.usersService.createUser({
+                    FullName: payload.FullName,
+                    UserAvatar: payload.UserAvatar,
+                    UserId: payload.UserId,
+                    ComId: payload.ComId,
+                    GroupId: payload.GroupId,
+                    email: payload.email,
+                    ComName: payload.ComName,
+                    UserRole: payload.UserRole,
+                });
+            user.secret = payload.EncryptKey;
+            user.token = token;
+            request['user'] = user;
+        }
+        catch (ex) {
+            console.log(ex);
+            throw new common_1.UnauthorizedException();
+        }
+        return true;
+    }
+    extractTokenFromHeader(request) {
+        var _a, _b;
+        const [type, token] = (_b = (_a = request.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')) !== null && _b !== void 0 ? _b : [];
+        return type === 'Bearer' ? token : undefined;
+    }
+};
+exports.AuthGuard = AuthGuard;
+AuthGuard.users = Array();
+exports.AuthGuard = AuthGuard = AuthGuard_1 = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof jwt_1.JwtService !== "undefined" && jwt_1.JwtService) === "function" ? _a : Object, typeof (_b = typeof config_1.ConfigService !== "undefined" && config_1.ConfigService) === "function" ? _b : Object, typeof (_c = typeof Users_service_1.UsersService !== "undefined" && Users_service_1.UsersService) === "function" ? _c : Object])
+], AuthGuard);
+
+
+/***/ }),
+/* 51 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RolesGuard = void 0;
+const common_1 = __webpack_require__(3);
+const core_1 = __webpack_require__(1);
+let RolesGuard = class RolesGuard {
+    constructor(reflector) {
+        this.reflector = reflector;
+    }
+    canActivate(context) {
+        const requiredRoles = this.reflector.getAllAndMerge('roles', [
+            context.getHandler(),
+            context.getClass(),
+        ]);
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+        const { user } = context.switchToHttp().getRequest();
+        return requiredRoles.some((role) => {
+            if (user.UserRole || user.roles.find((item) => item.isAdmin))
+                return true;
+            if (user.roles.find((item) => {
+                return item.permissions.find((permission) => (permission.subject === role.subject &&
+                    permission.action === role.action &&
+                    (permission.role === role.role ||
+                        permission.role === null ||
+                        permission.role === undefined)) ||
+                    permission.isAdmin);
+            }))
+                return true;
+            return false;
+        });
+    }
+};
+exports.RolesGuard = RolesGuard;
+exports.RolesGuard = RolesGuard = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof core_1.Reflector !== "undefined" && core_1.Reflector) === "function" ? _a : Object])
+], RolesGuard);
+
+
+/***/ }),
+/* 52 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1273,8 +2622,8 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransformerMiddleware = void 0;
 const common_1 = __webpack_require__(3);
-const crypto = __webpack_require__(28);
-const jwt_1 = __webpack_require__(29);
+const crypto = __webpack_require__(53);
+const jwt_1 = __webpack_require__(46);
 let TransformerMiddleware = class TransformerMiddleware {
     constructor(jwt) {
         this.jwt = jwt;
@@ -1364,1228 +2713,13 @@ exports.TransformerMiddleware = TransformerMiddleware = __decorate([
 
 
 /***/ }),
-/* 28 */
+/* 53 */
 /***/ ((module) => {
 
 module.exports = require("crypto");
 
 /***/ }),
-/* 29 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/jwt");
-
-/***/ }),
-/* 30 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var AuthGuard_1;
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AuthGuard = void 0;
-const common_1 = __webpack_require__(3);
-const config_1 = __webpack_require__(24);
-const jwt_1 = __webpack_require__(29);
-const Users_service_1 = __webpack_require__(31);
-let AuthGuard = AuthGuard_1 = class AuthGuard {
-    constructor(jwtService, configService, usersService) {
-        this.jwtService = jwtService;
-        this.configService = configService;
-        this.usersService = usersService;
-    }
-    async canActivate(context) {
-        var _a;
-        const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request);
-        if (!token) {
-            throw new common_1.UnauthorizedException();
-        }
-        try {
-            const payload = await this.jwtService.verifyAsync(token, {
-                secret: this.configService.get('SECRET'),
-            });
-            let user = (_a = AuthGuard_1.users) === null || _a === void 0 ? void 0 : _a.find((item) => item.UserId === payload.UserId);
-            if (user) {
-                user = await this.usersService.getUserById(payload.UserId);
-                user.secret = payload.EncryptKey;
-                user.token = token;
-                AuthGuard_1.users.push(user);
-            }
-            if (!user)
-                user = await this.usersService.createUser({
-                    FullName: payload.FullName,
-                    UserAvatar: payload.UserAvatar,
-                    UserId: payload.UserId,
-                    ComId: payload.ComId,
-                    GroupId: payload.GroupId,
-                    email: payload.email,
-                    ComName: payload.ComName,
-                    UserRole: payload.UserRole,
-                });
-            user.secret = payload.EncryptKey;
-            user.token = token;
-            request['user'] = user;
-        }
-        catch (ex) {
-            console.log(ex);
-            throw new common_1.UnauthorizedException();
-        }
-        return true;
-    }
-    extractTokenFromHeader(request) {
-        var _a, _b;
-        const [type, token] = (_b = (_a = request.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')) !== null && _b !== void 0 ? _b : [];
-        return type === 'Bearer' ? token : undefined;
-    }
-};
-exports.AuthGuard = AuthGuard;
-AuthGuard.users = Array();
-exports.AuthGuard = AuthGuard = AuthGuard_1 = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof jwt_1.JwtService !== "undefined" && jwt_1.JwtService) === "function" ? _a : Object, typeof (_b = typeof config_1.ConfigService !== "undefined" && config_1.ConfigService) === "function" ? _b : Object, typeof (_c = typeof Users_service_1.UsersService !== "undefined" && Users_service_1.UsersService) === "function" ? _c : Object])
-], AuthGuard);
-
-
-/***/ }),
-/* 31 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a, _b;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UsersService = void 0;
-const common_1 = __webpack_require__(3);
-const Roles_repository_1 = __webpack_require__(32);
-const Users_repository_1 = __webpack_require__(33);
-let UsersService = class UsersService {
-    constructor(usersRepository, rolesRepository) {
-        this.usersRepository = usersRepository;
-        this.rolesRepository = rolesRepository;
-    }
-    async getUserById(id) {
-        return this.usersRepository.findByUserId(id);
-    }
-    async createUser(data) {
-        const user = await this.usersRepository.create(data);
-        return user;
-    }
-};
-exports.UsersService = UsersService;
-exports.UsersService = UsersService = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof Users_repository_1.UsersRepository !== "undefined" && Users_repository_1.UsersRepository) === "function" ? _a : Object, typeof (_b = typeof Roles_repository_1.RolesRepository !== "undefined" && Roles_repository_1.RolesRepository) === "function" ? _b : Object])
-], UsersService);
-
-
-/***/ }),
-/* 32 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RolesRepository = void 0;
-const common_1 = __webpack_require__(3);
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const base_repository_1 = __webpack_require__(18);
-const Roles_entity_1 = __webpack_require__(12);
-let RolesRepository = class RolesRepository extends base_repository_1.BaseRepositoryAbstract {
-    constructor(roles) {
-        super(roles);
-        this.roles = roles;
-    }
-};
-exports.RolesRepository = RolesRepository;
-exports.RolesRepository = RolesRepository = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_2.InjectModel)(Roles_entity_1.Roles.name)),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
-], RolesRepository);
-
-
-/***/ }),
-/* 33 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UsersRepository = void 0;
-const common_1 = __webpack_require__(3);
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const base_repository_1 = __webpack_require__(18);
-const Users_entity_1 = __webpack_require__(14);
-let UsersRepository = class UsersRepository extends base_repository_1.BaseRepositoryAbstract {
-    constructor(users) {
-        super(users);
-        this.users = users;
-    }
-    async findByUserId(id) {
-        return await this.users.findOne({ UserId: id }).populate('roles');
-    }
-};
-exports.UsersRepository = UsersRepository;
-exports.UsersRepository = UsersRepository = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_2.InjectModel)(Users_entity_1.Users.name)),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
-], UsersRepository);
-
-
-/***/ }),
-/* 34 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RolesGuard = void 0;
-const common_1 = __webpack_require__(3);
-const core_1 = __webpack_require__(1);
-let RolesGuard = class RolesGuard {
-    constructor(reflector) {
-        this.reflector = reflector;
-    }
-    canActivate(context) {
-        const requiredRoles = this.reflector.getAllAndMerge('roles', [
-            context.getHandler(),
-            context.getClass(),
-        ]);
-        if (!requiredRoles || requiredRoles.length === 0) {
-            return true;
-        }
-        const { user } = context.switchToHttp().getRequest();
-        return requiredRoles.some((role) => {
-            if (user.UserRole || user.roles.find((item) => item.isAdmin))
-                return true;
-            if (user.roles.find((item) => {
-                return item.permissions.find((permission) => (permission.subject === role.subject &&
-                    permission.action === role.action &&
-                    (permission.role === role.role ||
-                        permission.role === null ||
-                        permission.role === undefined)) ||
-                    permission.isAdmin);
-            }))
-                return true;
-            return false;
-        });
-    }
-};
-exports.RolesGuard = RolesGuard;
-exports.RolesGuard = RolesGuard = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof core_1.Reflector !== "undefined" && core_1.Reflector) === "function" ? _a : Object])
-], RolesGuard);
-
-
-/***/ }),
-/* 35 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PurchaseInformationController = void 0;
-const purchaseInformation_create_dto_1 = __webpack_require__(36);
-const purchaseInformation_query_dto_1 = __webpack_require__(37);
-const purchaseInformation_update_dto_1 = __webpack_require__(38);
-const common_1 = __webpack_require__(3);
-const roles_decorator_1 = __webpack_require__(10);
-const users_decorator_1 = __webpack_require__(11);
-const Roles_entity_1 = __webpack_require__(12);
-const Users_entity_1 = __webpack_require__(14);
-const PurchaseInformation_service_1 = __webpack_require__(39);
-let PurchaseInformationController = class PurchaseInformationController {
-    constructor(purchaseInformationService) {
-        this.purchaseInformationService = purchaseInformationService;
-    }
-    query(user, query) {
-        return this.purchaseInformationService.query(user, query);
-    }
-    getById(id, user) {
-        return this.purchaseInformationService.getById(id, user);
-    }
-    create(user, data) {
-        return this.purchaseInformationService.create(user, data);
-    }
-    update(user, data) {
-        return this.purchaseInformationService.update(user, data);
-    }
-    deleteInfo(user) {
-    }
-};
-exports.PurchaseInformationController = PurchaseInformationController;
-__decorate([
-    (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.purchase }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Query)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object, typeof (_c = typeof purchaseInformation_query_dto_1.PurchaseInformationQueryDTO !== "undefined" && purchaseInformation_query_dto_1.PurchaseInformationQueryDTO) === "function" ? _c : Object]),
-    __metadata("design:returntype", void 0)
-], PurchaseInformationController.prototype, "query", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.customer }),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, users_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_d = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _d : Object]),
-    __metadata("design:returntype", void 0)
-], PurchaseInformationController.prototype, "getById", null);
-__decorate([
-    (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.CREATE, subject: Roles_entity_1.SUBJECT.purchase }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_e = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _e : Object, typeof (_f = typeof purchaseInformation_create_dto_1.PurchaseInformationCreateDTO !== "undefined" && purchaseInformation_create_dto_1.PurchaseInformationCreateDTO) === "function" ? _f : Object]),
-    __metadata("design:returntype", void 0)
-], PurchaseInformationController.prototype, "create", null);
-__decorate([
-    (0, common_1.Put)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.UPDATE, subject: Roles_entity_1.SUBJECT.purchase }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_g = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _g : Object, typeof (_h = typeof purchaseInformation_update_dto_1.PurchaseInformationUpdateDTO !== "undefined" && purchaseInformation_update_dto_1.PurchaseInformationUpdateDTO) === "function" ? _h : Object]),
-    __metadata("design:returntype", void 0)
-], PurchaseInformationController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.DELETE, subject: Roles_entity_1.SUBJECT.purchase }),
-    __param(0, (0, users_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_j = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _j : Object]),
-    __metadata("design:returntype", void 0)
-], PurchaseInformationController.prototype, "deleteInfo", null);
-exports.PurchaseInformationController = PurchaseInformationController = __decorate([
-    (0, common_1.Controller)('PurchaseInformation'),
-    __metadata("design:paramtypes", [typeof (_a = typeof PurchaseInformation_service_1.PurchaseInformationService !== "undefined" && PurchaseInformation_service_1.PurchaseInformationService) === "function" ? _a : Object])
-], PurchaseInformationController);
-
-
-/***/ }),
-/* 36 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PurchaseInformationCreateDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-class PurchaseInformationCreateDTO {
-}
-exports.PurchaseInformationCreateDTO = PurchaseInformationCreateDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "product", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "currencyUnit", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "describe", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "quantity", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "unit", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "price", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "transportFee", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "paymentTime", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationCreateDTO.prototype, "idUser", void 0);
-
-
-/***/ }),
-/* 37 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PurchaseInformationQueryDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-class PurchaseInformationQueryDTO {
-}
-exports.PurchaseInformationQueryDTO = PurchaseInformationQueryDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], PurchaseInformationQueryDTO.prototype, "skip", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], PurchaseInformationQueryDTO.prototype, "limit", void 0);
-
-
-/***/ }),
-/* 38 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PurchaseInformationUpdateDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-const purchaseInformation_create_dto_1 = __webpack_require__(36);
-class PurchaseInformationUpdateDTO extends purchaseInformation_create_dto_1.PurchaseInformationCreateDTO {
-}
-exports.PurchaseInformationUpdateDTO = PurchaseInformationUpdateDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'id khach hang',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], PurchaseInformationUpdateDTO.prototype, "id", void 0);
-
-
-/***/ }),
-/* 39 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a, _b;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PurchaseInformationService = void 0;
-const common_1 = __webpack_require__(3);
-const CustomerInformation_repository_1 = __webpack_require__(17);
-const PurchaseInformation_repository_1 = __webpack_require__(40);
-let PurchaseInformationService = class PurchaseInformationService {
-    constructor(purchaseInformationRepository, customerInformationRepository) {
-        this.purchaseInformationRepository = purchaseInformationRepository;
-        this.customerInformationRepository = customerInformationRepository;
-    }
-    async create(user, data) {
-        data.ComId = user.ComId;
-        const infoCustom = await this.customerInformationRepository.findOneById(data.idUser);
-        if (!infoCustom)
-            throw new common_1.NotFoundException('cannot find customer by id');
-        const information = await this.purchaseInformationRepository.create(data);
-        infoCustom.purchases.push(information);
-        await infoCustom.save();
-        information.customer = infoCustom;
-        await information.save();
-        const newInfomationCustom = await (await this.customerInformationRepository.findOneById(data.idUser)).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
-        return Object.assign(Object.assign({}, newInfomationCustom), { _doc: Object.assign(Object.assign({}, newInfomationCustom._doc), { star: newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
-                    newInfomationCustom.feedBacks.length || 0 }), secret: user.secret });
-    }
-    async query(user, query) {
-        return Object.assign(Object.assign({}, (await this.purchaseInformationRepository.findAllByCompany(user.ComId, query))), { secret: user.secret });
-    }
-    async getById(id, user) {
-        const purchase = await this.purchaseInformationRepository.findOneById(id);
-        if (!purchase)
-            throw new common_1.NotFoundException();
-        console.log('service', Object.assign(Object.assign({}, purchase), { secret: user.secret }));
-        return Object.assign(Object.assign({}, purchase), { secret: user.secret });
-    }
-    async update(user, info) {
-        const infoCustom = await this.purchaseInformationRepository.findOneById(info.id);
-        if (!infoCustom)
-            throw new common_1.NotFoundException();
-        if (infoCustom.ComId !== user.ComId)
-            throw new common_1.ForbiddenException();
-        await this.purchaseInformationRepository.update(info.id, Object.assign(Object.assign({}, info), { isHidden: true }));
-        const newInfomationCustom = await (await this.customerInformationRepository.findOneById(info.idUser)).populate([{ path: 'feedBacks' }, { path: 'purchases' }]);
-        await this.create(user, info);
-        return Object.assign(Object.assign({}, newInfomationCustom), { _doc: Object.assign(Object.assign({}, newInfomationCustom._doc), { star: newInfomationCustom.feedBacks.reduce((n, { rate }) => n + rate, 0) /
-                    newInfomationCustom.feedBacks.length || 0 }) });
-    }
-    async deletePurchase(user, id) {
-        const infoCustom = await this.purchaseInformationRepository.findOneById(id);
-        if (!infoCustom)
-            throw new common_1.NotFoundException();
-        if (infoCustom.ComId !== user.ComId)
-            throw new common_1.ForbiddenException();
-        return this.purchaseInformationRepository.softDelete(id);
-    }
-};
-exports.PurchaseInformationService = PurchaseInformationService;
-exports.PurchaseInformationService = PurchaseInformationService = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof PurchaseInformation_repository_1.PurchaseInformationRepository !== "undefined" && PurchaseInformation_repository_1.PurchaseInformationRepository) === "function" ? _a : Object, typeof (_b = typeof CustomerInformation_repository_1.CustomerInformationRepository !== "undefined" && CustomerInformation_repository_1.CustomerInformationRepository) === "function" ? _b : Object])
-], PurchaseInformationService);
-
-
-/***/ }),
-/* 40 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PurchaseInformationRepository = void 0;
-const common_1 = __webpack_require__(3);
-const mongoose_1 = __webpack_require__(15);
-const mongoose_2 = __webpack_require__(13);
-const base_repository_1 = __webpack_require__(18);
-const PurchaseInformation_entity_1 = __webpack_require__(20);
-let PurchaseInformationRepository = class PurchaseInformationRepository extends base_repository_1.BaseRepositoryAbstract {
-    constructor(purchaseInformation) {
-        super(purchaseInformation);
-        this.purchaseInformation = purchaseInformation;
-    }
-    async findAllByCompany(ComId, query) {
-        const [count, items] = await Promise.all([
-            this.purchaseInformation.count({
-                ComId: ComId,
-                deleted_at: null,
-            }),
-            this.purchaseInformation
-                .find({ ComId: ComId, deleted_at: null })
-                .skip(query.skip)
-                .limit(query.limit),
-            ,
-        ]);
-        return { count, items };
-    }
-};
-exports.PurchaseInformationRepository = PurchaseInformationRepository;
-exports.PurchaseInformationRepository = PurchaseInformationRepository = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_2.InjectModel)(PurchaseInformation_entity_1.PurchaseInformation.name)),
-    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_1.Model !== "undefined" && mongoose_1.Model) === "function" ? _a : Object])
-], PurchaseInformationRepository);
-
-
-/***/ }),
-/* 41 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a, _b, _c, _d, _e, _f, _g;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.MangamentController = void 0;
-const customerInformation_create_dto_1 = __webpack_require__(5);
-const customerInformation_update_dto_1 = __webpack_require__(9);
-const common_1 = __webpack_require__(3);
-const roles_decorator_1 = __webpack_require__(10);
-const users_decorator_1 = __webpack_require__(11);
-const Roles_entity_1 = __webpack_require__(12);
-const Users_entity_1 = __webpack_require__(14);
-const Mangament_service_1 = __webpack_require__(42);
-let MangamentController = class MangamentController {
-    constructor(mangament) {
-        this.mangament = mangament;
-    }
-    getAllUser(user) {
-        return this.mangament.getAllUser(user);
-    }
-    create(user, data) {
-    }
-    update(user, data) {
-    }
-    deleteInfo(user) {
-    }
-};
-exports.MangamentController = MangamentController;
-__decorate([
-    (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)({
-        role: Roles_entity_1.TYPEROLE.ADMIN,
-        action: Roles_entity_1.ACTION.GET,
-        subject: Roles_entity_1.SUBJECT.customer,
-    }),
-    __param(0, (0, users_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object]),
-    __metadata("design:returntype", void 0)
-], MangamentController.prototype, "getAllUser", null);
-__decorate([
-    (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.CREATE, subject: Roles_entity_1.SUBJECT.customer }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_c = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _c : Object, typeof (_d = typeof customerInformation_create_dto_1.CustomerInformationCreateDTO !== "undefined" && customerInformation_create_dto_1.CustomerInformationCreateDTO) === "function" ? _d : Object]),
-    __metadata("design:returntype", void 0)
-], MangamentController.prototype, "create", null);
-__decorate([
-    (0, common_1.Put)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.UPDATE, subject: Roles_entity_1.SUBJECT.customer }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_e = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _e : Object, typeof (_f = typeof customerInformation_update_dto_1.CustomerInformationUpdateDTO !== "undefined" && customerInformation_update_dto_1.CustomerInformationUpdateDTO) === "function" ? _f : Object]),
-    __metadata("design:returntype", void 0)
-], MangamentController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.DELETE, subject: Roles_entity_1.SUBJECT.customer }),
-    __param(0, (0, users_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_g = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _g : Object]),
-    __metadata("design:returntype", void 0)
-], MangamentController.prototype, "deleteInfo", null);
-exports.MangamentController = MangamentController = __decorate([
-    (0, common_1.Controller)('mangament'),
-    __metadata("design:paramtypes", [typeof (_a = typeof Mangament_service_1.MangamentService !== "undefined" && Mangament_service_1.MangamentService) === "function" ? _a : Object])
-], MangamentController);
-
-
-/***/ }),
-/* 42 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a, _b, _c, _d;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.MangamentService = void 0;
-const axios_1 = __webpack_require__(43);
-const common_1 = __webpack_require__(3);
-const rxjs_1 = __webpack_require__(44);
-const CustomerInformation_repository_1 = __webpack_require__(17);
-const FeedBacks_repository_1 = __webpack_require__(23);
-const PurchaseInformation_repository_1 = __webpack_require__(40);
-let MangamentService = class MangamentService {
-    constructor(feedbacksRepository, customerInformationRepository, purchaseInformationRepository, httpService) {
-        this.feedbacksRepository = feedbacksRepository;
-        this.customerInformationRepository = customerInformationRepository;
-        this.purchaseInformationRepository = purchaseInformationRepository;
-        this.httpService = httpService;
-    }
-    async getAllUser(user) {
-        const params = {
-            ComId: user.ComId,
-        };
-        return this.httpService
-            .post('https://remindwork.com/api/MobileApiAccount/GetStaffOfCompany', params, {
-            headers: {
-                Authorization: 'Bearer ' + user.token,
-            },
-        })
-            .pipe((0, rxjs_1.map)((resp) => resp.data));
-    }
-    async create(user, data) {
-        data.ComId = user.ComId;
-        const customer = await this.customerInformationRepository.findOneById(data.idInfo);
-        if (!customer)
-            throw new common_1.ForbiddenException();
-        const purchase = await this.purchaseInformationRepository.findOneById(data.idPurchase);
-        const feedback = await this.feedbacksRepository.create(data);
-        customer.feedBacks = [...customer.feedBacks, feedback];
-        await customer.save();
-        purchase.feedBack = feedback;
-        await purchase.save();
-        return feedback;
-    }
-    converStringToJson(obj) {
-        try {
-            return JSON.parse(obj);
-        }
-        catch (ex) {
-            return null;
-        }
-    }
-    async query(user, query) {
-        query.conditions = this.converStringToJson(query.conditions);
-        return this.feedbacksRepository.findAllByCompany(user.ComId, query);
-    }
-    async update(user, feedBack) {
-        const infoCustom = await this.feedbacksRepository.findOneById(feedBack.id);
-        if (!infoCustom)
-            throw new common_1.NotFoundException();
-        if (infoCustom.ComId !== user.ComId)
-            throw new common_1.ForbiddenException();
-        const customer = await this.customerInformationRepository.findOneById(feedBack.idInfo);
-        if (!customer)
-            throw new common_1.ForbiddenException();
-        const purchase = await this.purchaseInformationRepository.findOneById(feedBack.idPurchase);
-        await this.feedbacksRepository.update(feedBack.id, Object.assign(Object.assign({}, feedBack), { isHidden: true }));
-        const newFeedBack = await this.create(user, feedBack);
-        customer.feedBacks = [
-            ...customer.feedBacks.filter((item) => item.id !== feedBack.id),
-            newFeedBack,
-        ];
-        purchase.feedBack = newFeedBack;
-        await customer.save();
-        await purchase.save();
-        return newFeedBack;
-    }
-    async deleteFeedbacks(user, id) {
-        const infoCustom = await this.feedbacksRepository.findOneById(id);
-        if (!infoCustom)
-            throw new common_1.NotFoundException();
-        if (infoCustom.ComId !== user.ComId)
-            throw new common_1.ForbiddenException();
-        return this.feedbacksRepository.softDelete(id);
-    }
-};
-exports.MangamentService = MangamentService;
-exports.MangamentService = MangamentService = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof FeedBacks_repository_1.FeedbacksRepository !== "undefined" && FeedBacks_repository_1.FeedbacksRepository) === "function" ? _a : Object, typeof (_b = typeof CustomerInformation_repository_1.CustomerInformationRepository !== "undefined" && CustomerInformation_repository_1.CustomerInformationRepository) === "function" ? _b : Object, typeof (_c = typeof PurchaseInformation_repository_1.PurchaseInformationRepository !== "undefined" && PurchaseInformation_repository_1.PurchaseInformationRepository) === "function" ? _c : Object, typeof (_d = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _d : Object])
-], MangamentService);
-
-
-/***/ }),
-/* 43 */
-/***/ ((module) => {
-
-module.exports = require("@nestjs/axios");
-
-/***/ }),
-/* 44 */
-/***/ ((module) => {
-
-module.exports = require("rxjs");
-
-/***/ }),
-/* 45 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FeedbacksController = void 0;
-const feedbacks_create_dto_1 = __webpack_require__(46);
-const feedbacks_query_dto_1 = __webpack_require__(47);
-const feedbacks_update_dto_1 = __webpack_require__(48);
-const common_1 = __webpack_require__(3);
-const roles_decorator_1 = __webpack_require__(10);
-const users_decorator_1 = __webpack_require__(11);
-const Roles_entity_1 = __webpack_require__(12);
-const Users_entity_1 = __webpack_require__(14);
-const FeedBacks_service_1 = __webpack_require__(49);
-let FeedbacksController = class FeedbacksController {
-    constructor(feedbacksService) {
-        this.feedbacksService = feedbacksService;
-    }
-    query(user, query) {
-        return this.feedbacksService.query(user, query);
-    }
-    getById(id, user) {
-        return this.feedbacksService.getById(id, user);
-    }
-    create(user, data) {
-        return this.feedbacksService.create(user, data);
-    }
-    update(user, data) {
-        return this.feedbacksService.update(user, data);
-    }
-    deleteInfo(user) {
-    }
-};
-exports.FeedbacksController = FeedbacksController;
-__decorate([
-    (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.feedBacks }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Query)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_b = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _b : Object, typeof (_c = typeof feedbacks_query_dto_1.FeedBacksQueryDTO !== "undefined" && feedbacks_query_dto_1.FeedBacksQueryDTO) === "function" ? _c : Object]),
-    __metadata("design:returntype", void 0)
-], FeedbacksController.prototype, "query", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.GET, subject: Roles_entity_1.SUBJECT.customer }),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, users_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_d = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _d : Object]),
-    __metadata("design:returntype", void 0)
-], FeedbacksController.prototype, "getById", null);
-__decorate([
-    (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.CREATE, subject: Roles_entity_1.SUBJECT.feedBacks }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_e = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _e : Object, typeof (_f = typeof feedbacks_create_dto_1.FeedBacksCreateDTO !== "undefined" && feedbacks_create_dto_1.FeedBacksCreateDTO) === "function" ? _f : Object]),
-    __metadata("design:returntype", void 0)
-], FeedbacksController.prototype, "create", null);
-__decorate([
-    (0, common_1.Put)(),
-    (0, roles_decorator_1.Roles)({ action: Roles_entity_1.ACTION.UPDATE, subject: Roles_entity_1.SUBJECT.feedBacks }),
-    __param(0, (0, users_decorator_1.User)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_g = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _g : Object, typeof (_h = typeof feedbacks_update_dto_1.FeedBacksUpdateDTO !== "undefined" && feedbacks_update_dto_1.FeedBacksUpdateDTO) === "function" ? _h : Object]),
-    __metadata("design:returntype", void 0)
-], FeedbacksController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(),
-    (0, roles_decorator_1.Roles)({
-        role: Roles_entity_1.TYPEROLE.ADMIN,
-        action: Roles_entity_1.ACTION.DELETE,
-        subject: Roles_entity_1.SUBJECT.feedBacks,
-    }),
-    __param(0, (0, users_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_j = typeof Users_entity_1.Users !== "undefined" && Users_entity_1.Users) === "function" ? _j : Object]),
-    __metadata("design:returntype", void 0)
-], FeedbacksController.prototype, "deleteInfo", null);
-exports.FeedbacksController = FeedbacksController = __decorate([
-    (0, common_1.Controller)('feedbacks'),
-    __metadata("design:paramtypes", [typeof (_a = typeof FeedBacks_service_1.FeedBacksService !== "undefined" && FeedBacks_service_1.FeedBacksService) === "function" ? _a : Object])
-], FeedbacksController);
-
-
-/***/ }),
-/* 46 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FeedBacksCreateDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-class FeedBacksCreateDTO {
-}
-exports.FeedBacksCreateDTO = FeedBacksCreateDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: '',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksCreateDTO.prototype, "idInfo", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: '',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksCreateDTO.prototype, "idPurchase", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'tên sản phẩm',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksCreateDTO.prototype, "product", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'nhận xét của khách hàng',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksCreateDTO.prototype, "comment", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'khuyên nghị của khách hàng',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksCreateDTO.prototype, "recommendations", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'gợi ý của khách hàng cho sản phẩm',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksCreateDTO.prototype, "suggestion", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'số sao đánh giá 1 - 5',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], FeedBacksCreateDTO.prototype, "rate", void 0);
-
-
-/***/ }),
-/* 47 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FeedBacksQueryDTO = exports.QueryDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-class QueryDTO {
-}
-exports.QueryDTO = QueryDTO;
-class FeedBacksQueryDTO {
-}
-exports.FeedBacksQueryDTO = FeedBacksQueryDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    __metadata("design:type", QueryDTO)
-], FeedBacksQueryDTO.prototype, "conditions", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], FeedBacksQueryDTO.prototype, "skip", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'asaa',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], FeedBacksQueryDTO.prototype, "limit", void 0);
-
-
-/***/ }),
-/* 48 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FeedBacksUpdateDTO = void 0;
-const swagger_1 = __webpack_require__(6);
-const class_validator_1 = __webpack_require__(7);
-const feedbacks_create_dto_1 = __webpack_require__(46);
-class FeedBacksUpdateDTO extends feedbacks_create_dto_1.FeedBacksCreateDTO {
-}
-exports.FeedBacksUpdateDTO = FeedBacksUpdateDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: '',
-        description: 'id khach hang',
-    }),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], FeedBacksUpdateDTO.prototype, "id", void 0);
-
-
-/***/ }),
-/* 49 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FeedBacksService = void 0;
-const common_1 = __webpack_require__(3);
-const CustomerInformation_repository_1 = __webpack_require__(17);
-const FeedBacks_repository_1 = __webpack_require__(23);
-const PurchaseInformation_repository_1 = __webpack_require__(40);
-let FeedBacksService = class FeedBacksService {
-    constructor(feedbacksRepository, customerInformationRepository, purchaseInformationRepository) {
-        this.feedbacksRepository = feedbacksRepository;
-        this.customerInformationRepository = customerInformationRepository;
-        this.purchaseInformationRepository = purchaseInformationRepository;
-    }
-    async create(user, data) {
-        data.ComId = user.ComId;
-        const customer = await this.customerInformationRepository.findOneById(data.idInfo);
-        if (!customer)
-            throw new common_1.NotFoundException();
-        if (customer && customer.ComId !== data.ComId)
-            throw new common_1.ForbiddenException();
-        const purchase = await this.purchaseInformationRepository.findOneById(data.idPurchase);
-        if (!purchase)
-            throw new common_1.NotFoundException();
-        if (purchase && purchase.ComId !== data.ComId)
-            throw new common_1.ForbiddenException();
-        const feedback = await this.feedbacksRepository.create(data);
-        customer.feedBacks = [...customer.feedBacks, feedback];
-        await customer.save();
-        purchase.feedBack = feedback;
-        await purchase.save();
-        return feedback;
-    }
-    async query(user, query) {
-        return this.feedbacksRepository.findAllByCompany(user.ComId, query);
-    }
-    async getById(id, user) {
-        const feedBack = await this.feedbacksRepository.findOneById(id);
-        if (!feedBack)
-            throw new common_1.NotFoundException();
-        console.log('service', Object.assign(Object.assign({}, feedBack), { secret: user.secret }));
-        return Object.assign(Object.assign({}, feedBack), { secret: user.secret });
-    }
-    async update(user, feedBack) {
-        const infoCustom = await this.feedbacksRepository.findOneById(feedBack.id);
-        if (!infoCustom)
-            throw new common_1.NotFoundException();
-        if (infoCustom.ComId !== user.ComId)
-            throw new common_1.ForbiddenException();
-        const customer = await this.customerInformationRepository.findOneById(feedBack.idInfo);
-        if (!customer)
-            throw new common_1.ForbiddenException();
-        const purchase = await this.purchaseInformationRepository.findOneById(feedBack.idPurchase);
-        await this.feedbacksRepository.update(feedBack.id, Object.assign(Object.assign({}, feedBack), { isHidden: true }));
-        const newFeedBack = await this.create(user, feedBack);
-        customer.feedBacks = [
-            ...customer.feedBacks.filter((item) => item.id !== feedBack.id),
-            newFeedBack,
-        ];
-        purchase.feedBack = newFeedBack;
-        await customer.save();
-        await purchase.save();
-        return newFeedBack;
-    }
-    async deleteFeedbacks(user, id) {
-        const infoCustom = await this.feedbacksRepository.findOneById(id);
-        if (!infoCustom)
-            throw new common_1.NotFoundException();
-        if (infoCustom.ComId !== user.ComId)
-            throw new common_1.ForbiddenException();
-        return this.feedbacksRepository.softDelete(id);
-    }
-};
-exports.FeedBacksService = FeedBacksService;
-exports.FeedBacksService = FeedBacksService = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof FeedBacks_repository_1.FeedbacksRepository !== "undefined" && FeedBacks_repository_1.FeedbacksRepository) === "function" ? _a : Object, typeof (_b = typeof CustomerInformation_repository_1.CustomerInformationRepository !== "undefined" && CustomerInformation_repository_1.CustomerInformationRepository) === "function" ? _b : Object, typeof (_c = typeof PurchaseInformation_repository_1.PurchaseInformationRepository !== "undefined" && PurchaseInformation_repository_1.PurchaseInformationRepository) === "function" ? _c : Object])
-], FeedBacksService);
-
-
-/***/ }),
-/* 50 */
+/* 54 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -2598,8 +2732,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransformInterceptor = void 0;
 const common_1 = __webpack_require__(3);
-const operators_1 = __webpack_require__(51);
-const crypto = __webpack_require__(28);
+const operators_1 = __webpack_require__(55);
+const crypto = __webpack_require__(53);
 let TransformInterceptor = class TransformInterceptor {
     constructor() {
         this.isJson = (obj) => {
@@ -2700,7 +2834,7 @@ exports.TransformInterceptor = TransformInterceptor = __decorate([
 
 
 /***/ }),
-/* 51 */
+/* 55 */
 /***/ ((module) => {
 
 module.exports = require("rxjs/operators");
@@ -2742,8 +2876,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __webpack_require__(1);
 const app_module_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(3);
-const swagger_1 = __webpack_require__(6);
-const transform_interceptor_1 = __webpack_require__(50);
+const swagger_1 = __webpack_require__(10);
+const transform_interceptor_1 = __webpack_require__(54);
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe());
